@@ -298,7 +298,6 @@ C:\Users\samar\OneDrive\Escritorio\ANIMALITOS_PHARMA-master\ANIMALITOS_PHARMA_AP
 C:\Users\samar\OneDrive\Escritorio\ANIMALITOS_PHARMA-master\ANIMALITOS_PHARMA_API\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.ANIMALITOS_PHARMA_API.props
 C:\Users\samar\OneDrive\Escritorio\ANIMALITOS_PHARMA-master\ANIMALITOS_PHARMA_API\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.ANIMALITOS_PHARMA_API.props
 C:\Users\samar\OneDrive\Escritorio\ANIMALITOS_PHARMA-master\ANIMALITOS_PHARMA_API\obj\Debug\net8.0\staticwebassets.pack.json
-C:\Users\samar\OneDrive\Escritorio\ANIMALITOS_PHARMA-master\ANIMALITOS_PHARMA_API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\samar\OneDrive\Escritorio\ANIMALITOS_PHARMA-master\ANIMALITOS_PHARMA_API\obj\Debug\net8.0\ANIMALIT.168B9E60.Up2Date
 C:\Users\samar\OneDrive\Escritorio\ANIMALITOS_PHARMA-master\ANIMALITOS_PHARMA_API\obj\Debug\net8.0\ANIMALITOS_PHARMA_API.dll
 C:\Users\samar\OneDrive\Escritorio\ANIMALITOS_PHARMA-master\ANIMALITOS_PHARMA_API\obj\Debug\net8.0\refint\ANIMALITOS_PHARMA_API.dll
