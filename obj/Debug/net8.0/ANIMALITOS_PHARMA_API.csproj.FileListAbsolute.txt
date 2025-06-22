@@ -305,3 +305,4 @@ C:\Users\samar\OneDrive\Escritorio\ANIMALITOS_PHARMA-master\ANIMALITOS_PHARMA_AP
 C:\Users\samar\OneDrive\Escritorio\ANIMALITOS_PHARMA-master\ANIMALITOS_PHARMA_API\obj\Debug\net8.0\ANIMALITOS_PHARMA_API.pdb
 C:\Users\samar\OneDrive\Escritorio\ANIMALITOS_PHARMA-master\ANIMALITOS_PHARMA_API\obj\Debug\net8.0\ANIMALITOS_PHARMA_API.genruntimeconfig.cache
 C:\Users\samar\OneDrive\Escritorio\ANIMALITOS_PHARMA-master\ANIMALITOS_PHARMA_API\obj\Debug\net8.0\ref\ANIMALITOS_PHARMA_API.dll
+C:\Users\samar\OneDrive\Escritorio\ANIMALITOS_PHARMA-master\ANIMALITOS_PHARMA_API\obj\Debug\net8.0\ANIMALITOS_PHARMA_API.sourcelink.json
