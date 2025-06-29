@@ -7834,11 +7834,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\samar\\Source\\Repos\\ANIMALITOS_BACKEND\\ANIMALITOS_PHARMA_API.csproj",
+      "projectUniqueName": "C:\\Users\\samar\\source\\repos\\ANIMALITOS_BACKEND\\ANIMALITOS_PHARMA_API.csproj",
       "projectName": "ANIMALITOS_PHARMA_API",
-      "projectPath": "C:\\Users\\samar\\Source\\Repos\\ANIMALITOS_BACKEND\\ANIMALITOS_PHARMA_API.csproj",
+      "projectPath": "C:\\Users\\samar\\source\\repos\\ANIMALITOS_BACKEND\\ANIMALITOS_PHARMA_API.csproj",
       "packagesPath": "C:\\Users\\samar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\samar\\Source\\Repos\\ANIMALITOS_BACKEND\\obj\\",
+      "outputPath": "C:\\Users\\samar\\source\\repos\\ANIMALITOS_BACKEND\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

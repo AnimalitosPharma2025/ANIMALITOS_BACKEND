@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MK9fJwebCXQ=",
+  "dgSpecHash": "8B1VjAXQAH0=",
   "success": true,
-  "projectFilePath": "C:\\Users\\samar\\Source\\Repos\\ANIMALITOS_BACKEND\\ANIMALITOS_PHARMA_API.csproj",
+  "projectFilePath": "C:\\Users\\samar\\source\\repos\\ANIMALITOS_BACKEND\\ANIMALITOS_PHARMA_API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\samar\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\samar\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

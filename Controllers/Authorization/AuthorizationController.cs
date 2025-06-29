@@ -43,7 +43,7 @@ namespace ANIMALITOS_PHARMA_API.Controllers.Authorization
                 dynamic objectReturn = new
                 {
                     Username = userTemp.Username,
-                    //Permissions = CheckUserPermissions(userTemp.Id),
+                    Permissions = CheckUserPermissions(userTemp.Id),
                     Token = token
                 };
                 return ApiHelpers.CreateSuccessResult(objectReturn, nameof(SignIn));
@@ -53,18 +53,29 @@ namespace ANIMALITOS_PHARMA_API.Controllers.Authorization
                 return ApiHelpers.CreateBadResult(ex);
             }
         }
+        private List<String> CheckUserPermissions(int userId)
+        {
+            var userRol = _entityContext.UserRols
+                .Where(x => x.UserId == userId)
+                .SingleOrDefault();
 
-        //public List<Permission> CheckUserPermissions(int userId)
-        //{
-        //    var permissions = _entityContext.Permissions.ToList();
-        //    var rols = _entityContext.Rols.ToList();
+            if (userRol is null)
+                throw new Exception($"The user with the ID {userRol.Id} has no role");
 
+            var rolPermission = _entityContext.RolPermissions
+                .Where(x => x.RolId == userRol.Id)
+                .ToList();
 
-        //    //IQueryable<Models.RolPermission> query = from rp in _entityContext.RolPermissions 
-        //    //                                         where rp.
+            var listUserPermission = new List<string>();
+            foreach (var permission in rolPermission)
+            {
+                listUserPermission.Add(
+                    _entityContext.Permissions.Where(x => x.Id == permission.PermissionId).SingleOrDefault().Name.ToString()
+                );
+            }
 
-        //    var rolPermission = _entityContext.RolPermissions.
-        //}
+            return listUserPermission;
+        }
 
         [HttpPost]
         [Route("/Authorization/SignUp")]

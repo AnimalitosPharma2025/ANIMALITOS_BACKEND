@@ -101,6 +101,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.Authorization.AuthorizationController",
+    "Method": "SignUp",
+    "RelativePath": "Authorization/SignUp",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "ANIMALITOS_PHARMA_API.Contracts.User",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.ClientController",
     "Method": "CreateClient",
     "RelativePath": "Client/CreateClient",
