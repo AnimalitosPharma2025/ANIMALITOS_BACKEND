@@ -45,6 +45,8 @@ public partial class AnimalitosPharmaContext : DbContext
 
     public virtual DbSet<UserPermission> UserPermissions { get; set; }
 
+    public virtual DbSet<UserRol> UserRols { get; set; }
+
     public virtual DbSet<Vendor> Vendors { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -65,14 +67,13 @@ public partial class AnimalitosPharmaContext : DbContext
 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
 //        => optionsBuilder.UseSqlServer("workstation id=ANIMALITOS_PHARMA.mssql.somee.com;packet size=4096;user id=smarredondo_SQLLogin_1;pwd=h1et2z4bd4;data source=ANIMALITOS_PHARMA.mssql.somee.com;persist security info=False;initial catalog=ANIMALITOS_PHARMA;TrustServerCertificate=True");
 
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<AddressBook>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__ADDRESS___3214EC27C8F1C858");
+            entity.HasKey(e => e.Id).HasName("PK__ADDRESS___3214EC27CEE03FFA");
 
-            entity.ToTable("ADDRESS_BOOK", "dbo");
+            entity.ToTable("ADDRESS_BOOK");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Direction)
@@ -101,9 +102,9 @@ public partial class AnimalitosPharmaContext : DbContext
 
         modelBuilder.Entity<Client>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__CLIENTS__3214EC27426B762F");
+            entity.HasKey(e => e.Id).HasName("PK__CLIENTS__3214EC2752E8D72B");
 
-            entity.ToTable("CLIENTS", "dbo");
+            entity.ToTable("CLIENTS");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.AddressId).HasColumnName("ADDRESS_ID");
@@ -126,9 +127,9 @@ public partial class AnimalitosPharmaContext : DbContext
 
         modelBuilder.Entity<Credit>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__CREDITS__3214EC2730CD2BC0");
+            entity.HasKey(e => e.Id).HasName("PK__CREDITS__3214EC274B3985A0");
 
-            entity.ToTable("CREDITS", "dbo");
+            entity.ToTable("CREDITS");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.ExpirationDate)
@@ -153,9 +154,9 @@ public partial class AnimalitosPharmaContext : DbContext
 
         modelBuilder.Entity<Employee>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__EMPLOYEE__3214EC2798F56873");
+            entity.HasKey(e => e.Id).HasName("PK__EMPLOYEE__3214EC2766FDAF7F");
 
-            entity.ToTable("EMPLOYEES", "dbo");
+            entity.ToTable("EMPLOYEES");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.AddressId).HasColumnName("ADDRESS_ID");
@@ -185,9 +186,9 @@ public partial class AnimalitosPharmaContext : DbContext
 
         modelBuilder.Entity<InventoryItem>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__INVENTOR__3214EC2701FC66AC");
+            entity.HasKey(e => e.Id).HasName("PK__INVENTOR__3214EC2767320ED1");
 
-            entity.ToTable("INVENTORY_ITEM", "dbo");
+            entity.ToTable("INVENTORY_ITEM");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Code)
@@ -211,9 +212,9 @@ public partial class AnimalitosPharmaContext : DbContext
 
         modelBuilder.Entity<Permission>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__PERMISSI__3214EC27EA8AC4C9");
+            entity.HasKey(e => e.Id).HasName("PK__PERMISSI__3214EC2757E5CCF9");
 
-            entity.ToTable("PERMISSION", "dbo");
+            entity.ToTable("PERMISSION");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Description)
@@ -234,9 +235,9 @@ public partial class AnimalitosPharmaContext : DbContext
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__PRODUCT__3214EC27DE84CC1A");
+            entity.HasKey(e => e.Id).HasName("PK__PRODUCT__3214EC276E4FB5BE");
 
-            entity.ToTable("PRODUCT", "dbo");
+            entity.ToTable("PRODUCT");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Category)
@@ -269,9 +270,9 @@ public partial class AnimalitosPharmaContext : DbContext
 
         modelBuilder.Entity<ProductLot>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__PRODUCT___3214EC2799AB258C");
+            entity.HasKey(e => e.Id).HasName("PK__PRODUCT___3214EC27DC74C3B1");
 
-            entity.ToTable("PRODUCT_LOT", "dbo");
+            entity.ToTable("PRODUCT_LOT");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.DateReceipt)
@@ -290,9 +291,9 @@ public partial class AnimalitosPharmaContext : DbContext
 
         modelBuilder.Entity<Rol>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__ROL__3214EC27C94DE3AF");
+            entity.HasKey(e => e.Id).HasName("PK__ROL__3214EC27BC3BAA01");
 
-            entity.ToTable("ROL", "dbo");
+            entity.ToTable("ROL");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Description)
@@ -313,9 +314,9 @@ public partial class AnimalitosPharmaContext : DbContext
 
         modelBuilder.Entity<RolPermission>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__ROL_PERM__3214EC279BCB854C");
+            entity.HasKey(e => e.Id).HasName("PK__ROL_PERM__3214EC2731E245DA");
 
-            entity.ToTable("ROL_PERMISSION", "dbo");
+            entity.ToTable("ROL_PERMISSION");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.PermissionId).HasColumnName("PERMISSION_ID");
@@ -340,9 +341,9 @@ public partial class AnimalitosPharmaContext : DbContext
 
         modelBuilder.Entity<Sale>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__SALES__3214EC274D1A547C");
+            entity.HasKey(e => e.Id).HasName("PK__SALES__3214EC2765ABA51A");
 
-            entity.ToTable("SALES", "dbo");
+            entity.ToTable("SALES");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.ClientId).HasColumnName("CLIENT_ID");
@@ -375,9 +376,9 @@ public partial class AnimalitosPharmaContext : DbContext
 
         modelBuilder.Entity<Status>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__STATUS__3214EC274342BAE0");
+            entity.HasKey(e => e.Id).HasName("PK__STATUS__3214EC274BF1D45F");
 
-            entity.ToTable("STATUS", "dbo");
+            entity.ToTable("STATUS");
 
             entity.Property(e => e.Id)
                 .ValueGeneratedNever()
@@ -394,14 +395,14 @@ public partial class AnimalitosPharmaContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__USER__3214EC27285B130A");
+            entity.HasKey(e => e.Id).HasName("PK__USER__3214EC27F66C3CF9");
 
-            entity.ToTable("USER", "dbo");
+            entity.ToTable("USER");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.EmployeeId).HasColumnName("EMPLOYEE_ID");
             entity.Property(e => e.Password)
-                .HasMaxLength(15)
+                .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("PASSWORD");
             entity.Property(e => e.StatusId).HasColumnName("STATUS_ID");
@@ -422,9 +423,9 @@ public partial class AnimalitosPharmaContext : DbContext
 
         modelBuilder.Entity<UserPermission>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__USER_PER__3214EC27770FF754");
+            entity.HasKey(e => e.Id).HasName("PK__USER_PER__3214EC2732B1CBA2");
 
-            entity.ToTable("USER_PERMISSION", "dbo");
+            entity.ToTable("USER_PERMISSION");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.PermissionId).HasColumnName("PERMISSION_ID");
@@ -447,11 +448,40 @@ public partial class AnimalitosPharmaContext : DbContext
                 .HasConstraintName("FK_USER_PERMISSION_USER");
         });
 
+        modelBuilder.Entity<UserRol>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("USER_ROL");
+
+            entity.Property(e => e.Id)
+                .ValueGeneratedOnAdd()
+                .HasColumnName("ID");
+            entity.Property(e => e.RolId).HasColumnName("ROL_ID");
+            entity.Property(e => e.StatusId).HasColumnName("STATUS_ID");
+            entity.Property(e => e.UserId).HasColumnName("USER_ID");
+
+            entity.HasOne(d => d.Rol).WithMany()
+                .HasForeignKey(d => d.RolId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_USER_ROL_ROL");
+
+            entity.HasOne(d => d.Status).WithMany()
+                .HasForeignKey(d => d.StatusId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_USER_ROL_STATUS");
+
+            entity.HasOne(d => d.User).WithMany()
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_USER_ROL_USER");
+        });
+
         modelBuilder.Entity<Vendor>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__VENDOR__3214EC27554228E2");
+            entity.HasKey(e => e.Id).HasName("PK__VENDOR__3214EC27B586201D");
 
-            entity.ToTable("VENDOR", "dbo");
+            entity.ToTable("VENDOR");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.AddressId).HasColumnName("ADDRESS_ID");

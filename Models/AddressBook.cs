@@ -1,4 +1,7 @@
-﻿namespace ANIMALITOS_PHARMA_API.Models;
+﻿using System;
+using System.Collections.Generic;
+
+namespace ANIMALITOS_PHARMA_API.Models;
 
 public partial class AddressBook
 {

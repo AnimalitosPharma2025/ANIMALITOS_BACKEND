@@ -4,6 +4,9 @@ using ANIMALITOS_PHARMA_API.Custom;
 using ANIMALITOS_PHARMA_API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using NuGet.Common;
 
 namespace ANIMALITOS_PHARMA_API.Controllers.Authorization
 {
@@ -36,9 +39,11 @@ namespace ANIMALITOS_PHARMA_API.Controllers.Authorization
                     throw new Exception("Incorrect credentials.");
 
                 var token = _animalitos_pharma.GenerateToken(user);
+
                 dynamic objectReturn = new
                 {
-                    Username = user.Username,
+                    Username = userTemp.Username,
+                    //Permissions = CheckUserPermissions(userTemp.Id),
                     Token = token
                 };
                 return ApiHelpers.CreateSuccessResult(objectReturn, nameof(SignIn));
@@ -48,20 +53,55 @@ namespace ANIMALITOS_PHARMA_API.Controllers.Authorization
                 return ApiHelpers.CreateBadResult(ex);
             }
         }
-        //[HttpPost]
-        //[Route("/Authorization/SignUp")]
-        //public IActionResult SignUp(Contracts.User user)
+
+        //public List<Permission> CheckUserPermissions(int userId)
         //{
-        //    try
-        //    {
-        //        //var obj = accessor.SignUp(user);
-        //        return ApiHelpers.CreateSuccessResult(obj, nameof(SignUp));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return ApiHelpers.CreateBadResult(ex);
-        //    }
+        //    var permissions = _entityContext.Permissions.ToList();
+        //    var rols = _entityContext.Rols.ToList();
+
+
+        //    //IQueryable<Models.RolPermission> query = from rp in _entityContext.RolPermissions 
+        //    //                                         where rp.
+
+        //    var rolPermission = _entityContext.RolPermissions.
         //}
+
+        [HttpPost]
+        [Route("/Authorization/SignUp")]
+        public IActionResult SignUp(Contracts.User user)
+        {
+            try
+            {
+                if (user.Id > 0)
+                    throw new Exception($"Object with Id of {user.Id} exist.");
+
+                var newObj = new Models.User
+                {
+                    Id = user.Id,
+                    Username = user.Username,
+                    Password = _encrypt.Hash(user.Password),
+                    EmployeeId = user.EmployeeId,
+                    StatusId = user.StatusId
+                };
+
+                _entityContext.Users.Add(newObj);
+                _entityContext.SaveChanges();
+
+                dynamic objectReturn = new
+                {
+                    newObj.Id,
+                    newObj.Username,
+                    newObj.EmployeeId,
+                    newObj.StatusId
+                };
+
+                return ApiHelpers.CreateSuccessResult(objectReturn, nameof(SignUp));
+            }
+            catch (Exception ex)
+            {
+                return ApiHelpers.CreateBadResult(ex);
+            }
+        }
     }
 
 }
