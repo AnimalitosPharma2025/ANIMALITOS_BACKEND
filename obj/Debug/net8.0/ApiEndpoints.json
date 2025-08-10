@@ -580,6 +580,16 @@
   },
   {
     "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.ProductController",
+    "Method": "LoadProductTable",
+    "RelativePath": "Product/GetAllProducts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.ProductController",
     "Method": "GetListProduct",
     "RelativePath": "Product/GetListProduct",
     "HttpMethod": "POST",
@@ -1288,6 +1298,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.VendorController",
+    "Method": "LoadVendorTable",
+    "RelativePath": "Vendor/LoadVendorTable",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

@@ -64,6 +64,24 @@ namespace ANIMALITOS_PHARMA_API.Accessors
             return ConvertProduct_ToAccessorContract(newObj);
         }
 
+        public IEnumerable<dynamic> LoadProductTable()
+        {
+            var productsWithStock = (from product in _EntityContext.Products
+                                     let stock = _EntityContext.InventoryItems.Count(i => i.ProductId == product.Id)
+                                     select new
+                                     {
+                                         product.Id,
+                                         product.Name,
+                                         product.UnitPrice,
+                                         product.PurchasePrice,
+                                         product.Category,
+                                         Status = product.StatusId,
+                                         Stock = stock
+                                     }).ToList();
+
+            return productsWithStock;
+        }
+
         public Product UpdateProduct(Product obj)
         {
             if (obj.Id <= 0)

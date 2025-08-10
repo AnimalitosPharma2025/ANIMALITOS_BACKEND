@@ -52,7 +52,7 @@ public partial class AnimalitosPharmaContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (optionsBuilder.IsConfigured) return;
-        var connectionString = "workstation id=ANIMALITOS_PHARMA.mssql.somee.com;packet size=4096;user id=smarredondo_SQLLogin_1;pwd=h1et2z4bd4;data source=ANIMALITOS_PHARMA.mssql.somee.com;persist security info=False;initial catalog=ANIMALITOS_PHARMA;TrustServerCertificate=True";
+        var connectionString = "Data Source=SQL1004.site4now.net;Initial Catalog=db_abac9a_animalitospharma;User Id=db_abac9a_animalitospharma_admin;Password=QEdTsFa2TE92y8zc";
         if (_useRetryLogic)
         {
             optionsBuilder.UseSqlServer(

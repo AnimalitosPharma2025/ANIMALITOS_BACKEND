@@ -42,6 +42,22 @@ namespace ANIMALITOS_PHARMA_API.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("/Vendor/LoadVendorTable")]
+        public IActionResult LoadVendorTable()
+        {
+            try
+            {
+                accessor.Login((string)ApiHelpers.AuthorizationUser(Request));
+                var obj = accessor.LoadVendorTable();
+                return ApiHelpers.CreateSuccessResult(obj, nameof(LoadVendorTable));
+            }
+            catch (Exception ex)
+            {
+                return ApiHelpers.CreateBadResult(ex);
+            }
+        }
+
         [HttpPost]
         [Route("/Vendor/CreateVendor")]
         public IActionResult CreateVendor(Vendor vendor)

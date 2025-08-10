@@ -1,3 +1,4 @@
+using ANIMALITOS_PHARMA_API.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ANIMALITOS_PHARMA_API.Accessors
@@ -44,6 +45,22 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 throw new Exception($"Object with Id of {id} does exist.");
 
             return ConvertVendor_ToAccessorContract(objTemp);
+        }
+        public IEnumerable<dynamic> LoadVendorTable()
+        {
+            var vendorWithAddress = (
+                from vendor in _EntityContext.Vendors join address in _EntityContext.AddressBooks
+                    on vendor.AddressId equals address.Id
+                    select new
+                    {
+                        vendor.Id,
+                        vendor.Name,
+                        Status = vendor.StatusId,
+                        Address = address // objeto completo de AddressBook
+                      }
+               ).ToList();
+
+            return vendorWithAddress;
         }
 
         public Vendor CreateVendor(Vendor obj)

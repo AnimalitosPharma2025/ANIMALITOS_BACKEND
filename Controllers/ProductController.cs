@@ -41,6 +41,22 @@ namespace ANIMALITOS_PHARMA_API.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("/Product/GetAllProducts")]
+        public IActionResult LoadProductTable()
+        {
+            try
+            {
+                accessor.Login((string)ApiHelpers.AuthorizationUser(Request));
+                var obj = accessor.LoadProductTable();
+                return ApiHelpers.CreateSuccessResult(obj, nameof(GetListProduct));
+            }
+            catch (Exception ex)
+            {
+                return ApiHelpers.CreateBadResult(ex);
+            }
+        }
+
         [HttpPost]
         [Route("/Product/CreateProduct")]
         public IActionResult CreateProduct(Product product)
