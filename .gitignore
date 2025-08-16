@@ -1,7 +1,7 @@
 # .NET build/output directories
 # Ignorar archivos de compilación locales
-/bin/
-/obj/
+bin/
+obj/
 /staticwebassets.*.json
 
 # Visual Studio cache/options

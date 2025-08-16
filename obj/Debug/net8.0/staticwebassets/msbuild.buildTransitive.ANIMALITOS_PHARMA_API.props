@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\ANIMALITOS_PHARMA_API.props" />
-</Project>

@@ -17,6 +17,8 @@ public partial class User
 
     public virtual Employee? Employee { get; set; }
 
+    public virtual ICollection<NotificationsUser> NotificationsUsers { get; set; } = new List<NotificationsUser>();
+
     public virtual Status Status { get; set; } = null!;
 
     public virtual ICollection<UserPermission> UserPermissions { get; set; } = new List<UserPermission>();

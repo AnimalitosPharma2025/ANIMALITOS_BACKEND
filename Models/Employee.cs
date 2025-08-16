@@ -21,6 +21,8 @@ public partial class Employee
 
     public virtual ICollection<InventoryItem> InventoryItems { get; set; } = new List<InventoryItem>();
 
+    public virtual ICollection<Load> Loads { get; set; } = new List<Load>();
+
     public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
 
     public virtual Status Status { get; set; } = null!;
