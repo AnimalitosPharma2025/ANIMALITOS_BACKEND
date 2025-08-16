@@ -15,8 +15,6 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 query = query.Where(m => m.ProductId == filter.ProductId);
             if (filter.ProductLotId > 0)
                 query = query.Where(m => m.ProductLotId == filter.ProductLotId);
-            if (!string.IsNullOrWhiteSpace(filter.Code))
-                query = query.Where(m => m.Code == filter.Code);
             if (filter.EmployeeId > 0)
                 query = query.Where(m => m.EmployeeId == filter.EmployeeId);
             if (filter.StatusId != 0)
@@ -71,7 +69,6 @@ namespace ANIMALITOS_PHARMA_API.Accessors
             objTemp.Id = obj.Id;
             objTemp.ProductId = obj.ProductId;
             objTemp.ProductLotId = obj.ProductLotId;
-            objTemp.Code = obj.Code;
             objTemp.EmployeeId = obj.EmployeeId;
             objTemp.StatusId = obj.StatusId;
 
@@ -103,7 +100,6 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 Id = tempitem.Id,
                 ProductId = tempitem.ProductId,
                 ProductLotId = tempitem.ProductLotId,
-                Code = tempitem.Code,
                 EmployeeId = tempitem.EmployeeId,
                 StatusId = tempitem.StatusId
             };
@@ -118,7 +114,6 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 Id = tempitem.Id,
                 ProductId = tempitem.ProductId,
                 ProductLotId = tempitem.ProductLotId,
-                Code = tempitem.Code,
                 EmployeeId = tempitem.EmployeeId,
                 StatusId = tempitem.StatusId
             };

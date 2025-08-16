@@ -16,7 +16,6 @@ public partial class AnimalitosPharmaContext : DbContext
         : base(options)
     {
     }
-
     public virtual DbSet<AddressBook> AddressBooks { get; set; }
 
     public virtual DbSet<Client> Clients { get; set; }
@@ -26,6 +25,14 @@ public partial class AnimalitosPharmaContext : DbContext
     public virtual DbSet<Employee> Employees { get; set; }
 
     public virtual DbSet<InventoryItem> InventoryItems { get; set; }
+
+    public virtual DbSet<Load> Loads { get; set; }
+
+    public virtual DbSet<LoadsContent> LoadsContents { get; set; }
+
+    public virtual DbSet<Notification> Notifications { get; set; }
+
+    public virtual DbSet<NotificationsUser> NotificationsUsers { get; set; }
 
     public virtual DbSet<Permission> Permissions { get; set; }
 
@@ -50,22 +57,8 @@ public partial class AnimalitosPharmaContext : DbContext
     public virtual DbSet<Vendor> Vendors { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        if (optionsBuilder.IsConfigured) return;
-        var connectionString = "Data Source=SQL1004.site4now.net;Initial Catalog=db_abac9a_animalitospharma;User Id=db_abac9a_animalitospharma_admin;Password=QEdTsFa2TE92y8zc";
-        if (_useRetryLogic)
-        {
-            optionsBuilder.UseSqlServer(
-                connectionString,
-                options => options.EnableRetryOnFailure());
-        }
-        else
-        {
-            optionsBuilder.UseSqlServer(connectionString);
-        }
-    }
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-//        => optionsBuilder.UseSqlServer("workstation id=ANIMALITOS_PHARMA.mssql.somee.com;packet size=4096;user id=smarredondo_SQLLogin_1;pwd=h1et2z4bd4;data source=ANIMALITOS_PHARMA.mssql.somee.com;persist security info=False;initial catalog=ANIMALITOS_PHARMA;TrustServerCertificate=True");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=SQL1004.site4now.net;Database=db_abac9a_animalitospharma;User Id=db_abac9a_animalitospharma_admin;Password=QEdTsFa2TE92y8zc;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -191,10 +184,6 @@ public partial class AnimalitosPharmaContext : DbContext
             entity.ToTable("INVENTORY_ITEM");
 
             entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.Code)
-                .HasMaxLength(80)
-                .IsUnicode(false)
-                .HasColumnName("CODE");
             entity.Property(e => e.EmployeeId).HasColumnName("EMPLOYEE_ID");
             entity.Property(e => e.ProductId).HasColumnName("PRODUCT_ID");
             entity.Property(e => e.ProductLotId).HasColumnName("PRODUCT_LOT_ID");
@@ -208,6 +197,94 @@ public partial class AnimalitosPharmaContext : DbContext
                 .HasForeignKey(d => d.StatusId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_INVENTORY_STATUS");
+        });
+
+        modelBuilder.Entity<Load>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__LOADS__3214EC27E89BCB6E");
+
+            entity.ToTable("LOADS");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.CreatedDate)
+                .HasColumnType("datetime")
+                .HasColumnName("CREATED_DATE");
+            entity.Property(e => e.EmployeeId).HasColumnName("EMPLOYEE_ID");
+            entity.Property(e => e.LoadValue).HasColumnName("LOAD_VALUE");
+            entity.Property(e => e.StatusId).HasColumnName("STATUS_ID");
+
+            entity.HasOne(d => d.Employee).WithMany(p => p.Loads)
+                .HasForeignKey(d => d.EmployeeId)
+                .HasConstraintName("FK_LOADS_EMPLOYEES");
+
+            entity.HasOne(d => d.Status).WithMany(p => p.Loads)
+                .HasForeignKey(d => d.StatusId)
+                .HasConstraintName("FK_LOADS_STATUS");
+        });
+
+        modelBuilder.Entity<LoadsContent>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__LOADS_CO__3214EC27CA4D0629");
+
+            entity.ToTable("LOADS_CONTENT");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.InventoryId).HasColumnName("INVENTORY_ID");
+            entity.Property(e => e.LoadId).HasColumnName("LOAD_ID");
+            entity.Property(e => e.StatusId).HasColumnName("STATUS_ID");
+
+            entity.HasOne(d => d.Inventory).WithMany(p => p.LoadsContents)
+                .HasForeignKey(d => d.InventoryId)
+                .HasConstraintName("FK_LOADS_CONTENT_INVENTORY");
+
+            entity.HasOne(d => d.Load).WithMany(p => p.LoadsContents)
+                .HasForeignKey(d => d.LoadId)
+                .HasConstraintName("FK_LOADS_CONTENT_LOAD");
+
+            entity.HasOne(d => d.Status).WithMany(p => p.LoadsContents)
+                .HasForeignKey(d => d.StatusId)
+                .HasConstraintName("FK_LOADS_CONTENT_STATUS");
+        });
+
+        modelBuilder.Entity<Notification>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__NOTIFICA__3214EC2724136920");
+
+            entity.ToTable("NOTIFICATIONS");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Message)
+                .IsUnicode(false)
+                .HasColumnName("MESSAGE");
+            entity.Property(e => e.StatusId).HasColumnName("STATUS_ID");
+            entity.Property(e => e.Title)
+                .HasMaxLength(150)
+                .IsUnicode(false)
+                .HasColumnName("TITLE");
+
+            entity.HasOne(d => d.Status).WithMany(p => p.Notifications)
+                .HasForeignKey(d => d.StatusId)
+                .HasConstraintName("FK_NOTIFICATIONS_STATUS");
+        });
+
+        modelBuilder.Entity<NotificationsUser>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__NOTIFICA__3214EC27EC79CE34");
+
+            entity.ToTable("NOTIFICATIONS_USER");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.IsRead).HasColumnName("IS_READ");
+            entity.Property(e => e.StatusId).HasColumnName("STATUS_ID");
+            entity.Property(e => e.UserId).HasColumnName("USER_ID");
+
+            entity.HasOne(d => d.Status).WithMany(p => p.NotificationsUsers)
+                .HasForeignKey(d => d.StatusId)
+                .HasConstraintName("FK_NOTIFICATIONS_USER_STATUS");
+
+            entity.HasOne(d => d.User).WithMany(p => p.NotificationsUsers)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK_NOTIFICATIONS_USER_USER");
         });
 
         modelBuilder.Entity<Permission>(entity =>
@@ -244,6 +321,10 @@ public partial class AnimalitosPharmaContext : DbContext
                 .HasMaxLength(25)
                 .IsUnicode(false)
                 .HasColumnName("CATEGORY");
+            entity.Property(e => e.Code)
+                .HasMaxLength(80)
+                .IsUnicode(false)
+                .HasColumnName("CODE");
             entity.Property(e => e.Description)
                 .HasMaxLength(100)
                 .IsUnicode(false)

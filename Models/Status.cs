@@ -21,6 +21,14 @@ public partial class Status
 
     public virtual ICollection<InventoryItem> InventoryItems { get; set; } = new List<InventoryItem>();
 
+    public virtual ICollection<Load> Loads { get; set; } = new List<Load>();
+
+    public virtual ICollection<LoadsContent> LoadsContents { get; set; } = new List<LoadsContent>();
+
+    public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
+
+    public virtual ICollection<NotificationsUser> NotificationsUsers { get; set; } = new List<NotificationsUser>();
+
     public virtual ICollection<Permission> Permissions { get; set; } = new List<Permission>();
 
     public virtual ICollection<ProductLot> ProductLots { get; set; } = new List<ProductLot>();
