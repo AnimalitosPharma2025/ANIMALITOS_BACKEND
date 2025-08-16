@@ -21,8 +21,6 @@ public partial class Product
 
     public int StatusId { get; set; }
 
-    public string? Code { get; set; }
-
     public virtual Status Status { get; set; } = null!;
 
     public virtual Vendor Vendor { get; set; } = null!;

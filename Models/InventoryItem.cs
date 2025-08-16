@@ -11,13 +11,13 @@ public partial class InventoryItem
 
     public int ProductLotId { get; set; }
 
+    public string Code { get; set; } = null!;
+
     public int? EmployeeId { get; set; }
 
     public int StatusId { get; set; }
 
     public virtual Employee? Employee { get; set; }
-
-    public virtual ICollection<LoadsContent> LoadsContents { get; set; } = new List<LoadsContent>();
 
     public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
 
