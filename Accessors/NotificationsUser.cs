@@ -5,17 +5,17 @@ namespace ANIMALITOS_PHARMA_API.Accessors
 {
     public partial class AnimalitosClient
     {
-        public IEnumerable<Notification> GetListNotifications(NotificationFilter filter)
+        public IEnumerable<NotificationsUser> GetListNotificationsUser(NotificationsUserFilter filter)
         {
-            IQueryable<Models.Notification> query = from m in _EntityContext.Notifications select m;
+            IQueryable<Models.NotificationsUser> query = from m in _EntityContext.NotificationsUsers select m;
             query = query.AsNoTracking();
 
             if (filter.Id > 0)
                 query = query.Where(m => m.Id == filter.Id);
-            if (!string.IsNullOrEmpty(filter.Title))
-                query = query.Where(m => m.Title == filter.Title);
-            if (!string.IsNullOrEmpty(filter.Message))
-                query = query.Where(m => m.Message == filter.Message);
+            if (filter.IsRead != null)
+                query = query.Where(m => m.IsRead == filter.IsRead);
+            if (filter.UserId > 0)
+                query = query.Where(m => m.UserId == filter.UserId);
             if (filter.StatusId != 0)
                 query = query.Where(m => m.StatusId == filter.StatusId);
 
@@ -28,9 +28,9 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 query = query.Take(filter.PagingRange);
 
             var tempStuff = query.ToList();
-            List<Notification> context = new List<Notification>();
-            foreach (Models.Notification tempitem in tempStuff)
-                context.Add(ConvertNotification_ToAccessorContract(tempitem));
+            List<NotificationsUser> context = new List<NotificationsUser>();
+            foreach (Models.NotificationsUser tempitem in tempStuff)
+                context.Add(ConvertNotificationsUser_ToAccessorContract(tempitem));
 
             return context;
         }
@@ -91,26 +91,26 @@ namespace ANIMALITOS_PHARMA_API.Accessors
             return ConvertNotification_ToAccessorContract(objTemp);
         }
 
-        private Notification ConvertNotification_ToAccessorContract(Models.Notification tempitem)
+        private NotificationsUser ConvertNotificationsUser_ToAccessorContract(Models.NotificationsUser tempitem)
         {
-            var newObj = new Notification
+            var newObj = new NotificationsUser
             {
                 Id = tempitem.Id,
-                Title = tempitem.Title,
-                Message = tempitem.Message,
+                IsRead = tempitem.IsRead,
+                UserId = tempitem.UserId,
                 StatusId = tempitem.StatusId
             };
 
             return newObj;
         }
 
-        private Models.Notification ConvertNotification_ToAccessorModel(Notification tempitem)
+        private Models.NotificationsUser ConvertNotificationsUser_ToAccessorModel(NotificationsUser tempitem)
         {
-            var newObj = new Models.Notification
+            var newObj = new Models.NotificationsUser
             {
                 Id = tempitem.Id,
-                Title = tempitem.Title,
-                Message = tempitem.Message,
+                IsRead = tempitem.IsRead,
+                UserId = tempitem.UserId,
                 StatusId = tempitem.StatusId
             };
 

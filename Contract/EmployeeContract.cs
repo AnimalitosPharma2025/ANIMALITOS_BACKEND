@@ -6,11 +6,13 @@ public class Employee
 
     public string LastName { get; set; } = null!;
 
-    public string? Rol { get; set; } = null!;
+    public string? Rol { get; set; } = "";
 
     public int? AddressId { get; set; } = 0;
 
     public int StatusId { get; set; } = 0;
+
+    public double? DailyAmount { get; set; } = 0;
 }
 
 public class EmployeeFilter
@@ -21,11 +23,13 @@ public class EmployeeFilter
 
     public string LastName { get; set; } = null!;
 
-    public string? Rol { get; set; } = null!;
+    public string? Rol { get; set; } = "";
 
     public int? AddressId { get; set; } = 0;
 
     public int StatusId { get; set; } = 0;
+
+    public double? DailyAmount { get; set; } = 0;
 
     public string SortColumn { get; set; } = "";
 

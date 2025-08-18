@@ -19,6 +19,8 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 query = query.Where(m => m.Rol == filter.Rol);
             if (filter.AddressId > 0)
                 query = query.Where(m => m.AddressId == filter.AddressId);
+            if (filter.DailyAmount > 0)
+                query = query.Where(m => m.DailyAmount == filter.DailyAmount);
             if (filter.StatusId != 0)
                 query = query.Where(m => m.StatusId == filter.StatusId);
 
@@ -73,6 +75,7 @@ namespace ANIMALITOS_PHARMA_API.Accessors
             objTemp.LastName = obj.LastName;
             objTemp.Rol = obj.Rol;
             objTemp.AddressId = obj.AddressId;
+            objTemp.DailyAmount = obj.DailyAmount;
             objTemp.StatusId = obj.StatusId;
 
             _EntityContext.Employees.Update(objTemp);
@@ -105,6 +108,7 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 LastName = tempitem.LastName,
                 Rol = tempitem.Rol,
                 AddressId = tempitem.AddressId,
+                DailyAmount = tempitem.DailyAmount,
                 StatusId = tempitem.StatusId
             };
 
@@ -120,6 +124,7 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 LastName = tempitem.LastName,
                 Rol = tempitem.Rol,
                 AddressId = tempitem.AddressId,
+                DailyAmount= tempitem.DailyAmount,
                 StatusId = tempitem.StatusId
             };
 
