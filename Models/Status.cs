@@ -15,6 +15,8 @@ public partial class Status
 
     public virtual ICollection<Client> Clients { get; set; } = new List<Client>();
 
+    public virtual ICollection<CreditPayment> CreditPayments { get; set; } = new List<CreditPayment>();
+
     public virtual ICollection<Credit> Credits { get; set; } = new List<Credit>();
 
     public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();

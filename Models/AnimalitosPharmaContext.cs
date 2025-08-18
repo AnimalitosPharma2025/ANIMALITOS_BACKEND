@@ -22,6 +22,8 @@ public partial class AnimalitosPharmaContext : DbContext
 
     public virtual DbSet<Credit> Credits { get; set; }
 
+    public virtual DbSet<CreditPayment> CreditPayments { get; set; }
+
     public virtual DbSet<Employee> Employees { get; set; }
 
     public virtual DbSet<InventoryItem> InventoryItems { get; set; }
@@ -58,7 +60,7 @@ public partial class AnimalitosPharmaContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=SQL1004.site4now.net;Database=db_abac9a_animalitospharma;User Id=db_abac9a_animalitospharma_admin;Password=QEdTsFa2TE92y8zc;");
+        => optionsBuilder.UseSqlServer("Server=SQL1004.site4now.net;Database=db_abac9a_animalitospharma;User Id=db_abac9a_animalitospharma_admin;Password=QEdTsFa2TE92y8zc;TrustServerCertificate=True;MultipleActiveResultSets=true;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -125,24 +127,39 @@ public partial class AnimalitosPharmaContext : DbContext
             entity.ToTable("CREDITS");
 
             entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.AuthorizeCredit).HasColumnName("AUTHORIZE_CREDIT");
+            entity.Property(e => e.ClientId).HasColumnName("CLIENT_ID");
             entity.Property(e => e.ExpirationDate)
                 .HasColumnType("datetime")
                 .HasColumnName("EXPIRATION_DATE");
             entity.Property(e => e.PurchaseDate)
                 .HasColumnType("datetime")
                 .HasColumnName("PURCHASE_DATE");
-            entity.Property(e => e.SaleId).HasColumnName("SALE_ID");
             entity.Property(e => e.StatusId).HasColumnName("STATUS_ID");
-
-            entity.HasOne(d => d.Sale).WithMany(p => p.Credits)
-                .HasForeignKey(d => d.SaleId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_CREDITS_SALES");
 
             entity.HasOne(d => d.Status).WithMany(p => p.Credits)
                 .HasForeignKey(d => d.StatusId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CREDITS_STATUS");
+        });
+
+        modelBuilder.Entity<CreditPayment>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__CREDIT_P__3214EC2753DAB4E9");
+
+            entity.ToTable("CREDIT_PAYMENTS");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.CreditId).HasColumnName("CREDIT_ID");
+            entity.Property(e => e.PaymentAmount).HasColumnName("PAYMENT_AMOUNT");
+            entity.Property(e => e.PaymentDate)
+                .HasColumnType("datetime")
+                .HasColumnName("PAYMENT_DATE");
+            entity.Property(e => e.StatusId).HasColumnName("STATUS_ID");
+
+            entity.HasOne(d => d.Status).WithMany(p => p.CreditPayments)
+                .HasForeignKey(d => d.StatusId)
+                .HasConstraintName("FK_CREDITS_PAYMENT_STATUS");
         });
 
         modelBuilder.Entity<Employee>(entity =>
@@ -153,6 +170,7 @@ public partial class AnimalitosPharmaContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.AddressId).HasColumnName("ADDRESS_ID");
+            entity.Property(e => e.DailyAmount).HasColumnName("DAILY_AMOUNT");
             entity.Property(e => e.LastName)
                 .HasMaxLength(25)
                 .IsUnicode(false)
@@ -329,6 +347,9 @@ public partial class AnimalitosPharmaContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("DESCRIPTION");
+            entity.Property(e => e.ImageUrl)
+                .IsUnicode(false)
+                .HasColumnName("IMAGE_URL");
             entity.Property(e => e.Name)
                 .HasMaxLength(25)
                 .IsUnicode(false)
@@ -482,6 +503,9 @@ public partial class AnimalitosPharmaContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.EmployeeId).HasColumnName("EMPLOYEE_ID");
+            entity.Property(e => e.ImageUrl)
+                .IsUnicode(false)
+                .HasColumnName("IMAGE_URL");
             entity.Property(e => e.Password)
                 .HasMaxLength(100)
                 .IsUnicode(false)

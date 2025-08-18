@@ -1,10 +1,16 @@
 public class Credit
 {
     public int Id { get; set; } = 0;
+
     public DateTime PurchaseDate { get; set; } = DateTime.Now;
+
     public DateTime ExpirationDate { get; set; } = DateTime.Now;
-    public int SaleId { get; set; } = 0;
+
     public int StatusId { get; set; } = 0;
+
+    public bool? AuthorizeCredit { get; set; } = false;
+
+    public int? ClientId { get; set; } = 0;
 }
 
 public class CreditFilter
@@ -18,6 +24,10 @@ public class CreditFilter
     public int SaleId { get; set; } = 0;
 
     public int StatusId { get; set; } = 0;
+
+    public bool? AuthorizeCredit { get; set; } = false;
+
+    public int? ClientId { get; set; } = 0;
 
     public string SortColumn { get; set; } = "";
 

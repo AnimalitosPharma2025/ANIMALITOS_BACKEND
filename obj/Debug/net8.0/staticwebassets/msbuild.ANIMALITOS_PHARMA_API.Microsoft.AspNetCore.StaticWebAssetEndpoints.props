@@ -4,13 +4,13 @@
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ANIMALITOS_PHARMA_API.f998067y0y.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-46grS2\u002BZlu1yE6g03inzN\u002BTOVgT/aWDQgs8yRM2vCvU="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1139"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u002246grS2\u002BZlu1yE6g03inzN\u002BTOVgT/aWDQgs8yRM2vCvU=\u0022"},{"Name":"Last-Modified","Value":"Sat, 16 Aug 2025 03:48:00 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1139"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u002246grS2\u002BZlu1yE6g03inzN\u002BTOVgT/aWDQgs8yRM2vCvU=\u0022"},{"Name":"Last-Modified","Value":"Mon, 18 Aug 2025 01:17:41 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/ANIMALITOS_PHARMA_API/ANIMALITOS_PHARMA_API.f998067y0y.bundle.scp.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ANIMALITOS_PHARMA_API.f998067y0y.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"f998067y0y"},{"Name":"integrity","Value":"sha256-46grS2\u002BZlu1yE6g03inzN\u002BTOVgT/aWDQgs8yRM2vCvU="},{"Name":"label","Value":"_content/ANIMALITOS_PHARMA_API/ANIMALITOS_PHARMA_API.bundle.scp.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1139"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u002246grS2\u002BZlu1yE6g03inzN\u002BTOVgT/aWDQgs8yRM2vCvU=\u0022"},{"Name":"Last-Modified","Value":"Sat, 16 Aug 2025 03:48:00 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1139"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u002246grS2\u002BZlu1yE6g03inzN\u002BTOVgT/aWDQgs8yRM2vCvU=\u0022"},{"Name":"Last-Modified","Value":"Mon, 18 Aug 2025 01:17:41 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/ANIMALITOS_PHARMA_API/css/site.c2tiyv64ts.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>

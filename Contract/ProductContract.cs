@@ -12,6 +12,8 @@ public class Product
 
     public double UnitPrice { get; set; } = 0;
 
+    public string Code { get; set; } = "";
+
     public int VendorId { get; set; } = 0;
 
     public int StatusId { get; set; } = 0;
@@ -34,6 +36,8 @@ public class ProductFilter
     public int VendorId { get; set; } = 0;
 
     public int StatusId { get; set; } = 0;
+
+    public string Code { get; set; } = "";
 
     public string SortColumn { get; set; } = "";
 

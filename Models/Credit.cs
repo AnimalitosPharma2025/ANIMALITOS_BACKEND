@@ -11,11 +11,11 @@ public partial class Credit
 
     public DateTime ExpirationDate { get; set; }
 
-    public int SaleId { get; set; }
-
     public int StatusId { get; set; }
 
-    public virtual Sale Sale { get; set; } = null!;
+    public bool? AuthorizeCredit { get; set; }
+
+    public int? ClientId { get; set; }
 
     public virtual Status Status { get; set; } = null!;
 }

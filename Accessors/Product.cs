@@ -23,6 +23,8 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 query = query.Where(m => m.UnitPrice == filter.UnitPrice);
             if (filter.VendorId > 0)
                 query = query.Where(m => m.VendorId == filter.VendorId);
+            if (!string.IsNullOrEmpty(filter.Code))
+                query = query.Where(m => m.Code == filter.Code);
             if (filter.StatusId != 0)
                 query = query.Where(m => m.StatusId == filter.StatusId);
 
@@ -71,6 +73,7 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                                      select new
                                      {
                                          product.Id,
+                                         product.Code,
                                          product.Name,
                                          product.UnitPrice,
                                          product.PurchasePrice,
@@ -96,6 +99,7 @@ namespace ANIMALITOS_PHARMA_API.Accessors
             objTemp.Category = obj.Category;
             objTemp.PurchasePrice = obj.PurchasePrice;
             objTemp.UnitPrice = obj.UnitPrice;
+            objTemp.Code = obj.Code;
             objTemp.VendorId = obj.VendorId;
             objTemp.StatusId = obj.StatusId;
 
@@ -130,6 +134,7 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 Category = tempitem.Category,
                 PurchasePrice = tempitem.PurchasePrice,
                 UnitPrice = tempitem.UnitPrice,
+                Code = tempitem.Code,
                 VendorId = tempitem.VendorId,
                 StatusId = tempitem.StatusId
             };
@@ -147,6 +152,7 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 Category = tempitem.Category,
                 PurchasePrice = tempitem.PurchasePrice,
                 UnitPrice = tempitem.UnitPrice,
+                Code = tempitem.Code,
                 VendorId = tempitem.VendorId,
                 StatusId = tempitem.StatusId
             };

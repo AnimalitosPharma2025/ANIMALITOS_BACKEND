@@ -17,6 +17,8 @@ public partial class Employee
 
     public int StatusId { get; set; }
 
+    public double? DailyAmount { get; set; }
+
     public virtual AddressBook? Address { get; set; }
 
     public virtual ICollection<InventoryItem> InventoryItems { get; set; } = new List<InventoryItem>();

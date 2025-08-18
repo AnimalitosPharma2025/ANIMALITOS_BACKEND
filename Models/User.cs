@@ -15,6 +15,8 @@ public partial class User
 
     public int StatusId { get; set; }
 
+    public string? ImageUrl { get; set; }
+
     public virtual Employee? Employee { get; set; }
 
     public virtual ICollection<NotificationsUser> NotificationsUsers { get; set; } = new List<NotificationsUser>();

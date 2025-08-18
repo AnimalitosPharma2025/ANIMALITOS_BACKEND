@@ -23,6 +23,8 @@ public partial class Product
 
     public string? Code { get; set; }
 
+    public string? ImageUrl { get; set; }
+
     public virtual Status Status { get; set; } = null!;
 
     public virtual Vendor Vendor { get; set; } = null!;

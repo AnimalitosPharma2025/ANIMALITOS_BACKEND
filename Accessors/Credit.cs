@@ -15,10 +15,12 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 query = query.Where(m => m.PurchaseDate == filter.PurchaseDate);
             if (filter.ExpirationDate is not null)
                 query = query.Where(m => m.ExpirationDate == filter.ExpirationDate);
-            if (filter.SaleId > 0)
-                query = query.Where(m => m.SaleId == filter.SaleId);
             if (filter.StatusId != 0)
                 query = query.Where(m => m.StatusId == filter.StatusId);
+            if (filter.AuthorizeCredit != null)
+                query = query.Where(m => m.AuthorizeCredit == filter.AuthorizeCredit);
+            if (filter.ClientId > 0)
+                query = query.Where(m => m.ClientId == filter.ClientId);
 
             if (!string.IsNullOrWhiteSpace(filter.SortColumn))
                 query = query.OrderBy(query => filter.SortColumn);
@@ -69,8 +71,9 @@ namespace ANIMALITOS_PHARMA_API.Accessors
             objTemp.Id = obj.Id;
             objTemp.PurchaseDate = obj.PurchaseDate;
             objTemp.ExpirationDate = obj.ExpirationDate;
-            objTemp.SaleId = obj.SaleId;
             objTemp.StatusId = obj.StatusId;
+            objTemp.AuthorizeCredit = obj.AuthorizeCredit;
+            objTemp.ClientId = obj.ClientId;
 
             _EntityContext.Credits.Update(objTemp);
             _EntityContext.SaveChanges();
@@ -100,8 +103,9 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 Id = tempitem.Id,
                 PurchaseDate = tempitem.PurchaseDate,
                 ExpirationDate = tempitem.ExpirationDate,
-                SaleId = tempitem.SaleId,
-                StatusId = tempitem.StatusId
+                StatusId = tempitem.StatusId,
+                AuthorizeCredit = tempitem.AuthorizeCredit,
+                ClientId = tempitem.ClientId
             };
 
             return newObj;
@@ -114,12 +118,12 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 Id = tempitem.Id,
                 PurchaseDate = tempitem.PurchaseDate,
                 ExpirationDate = tempitem.ExpirationDate,
-                SaleId = tempitem.SaleId,
-                StatusId = tempitem.StatusId
+                StatusId = tempitem.StatusId,
+                AuthorizeCredit = tempitem.AuthorizeCredit,
+                ClientId = tempitem.ClientId
             };
 
             return newObj;
         }
-
     }
 }

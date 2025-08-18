@@ -19,8 +19,6 @@ public partial class Sale
 
     public virtual Client? Client { get; set; }
 
-    public virtual ICollection<Credit> Credits { get; set; } = new List<Credit>();
-
     public virtual Employee Employee { get; set; } = null!;
 
     public virtual InventoryItem Inventory { get; set; } = null!;
