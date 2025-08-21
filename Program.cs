@@ -6,12 +6,11 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.WebHost.UseWebRoot("wwwroot");
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins, policy => {

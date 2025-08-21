@@ -287,6 +287,91 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.CreditPaymentController",
+    "Method": "CreateCreditPayment",
+    "RelativePath": "CreditPayment/CreateCreditPayment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "creditPayment",
+        "Type": "ANIMALITOS_PHARMA_API.Contracts.CreditPayment",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.CreditPaymentController",
+    "Method": "DeleteCreditPayment",
+    "RelativePath": "CreditPayment/DeleteCreditPayment/{hardDelete}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "creditPayment",
+        "Type": "ANIMALITOS_PHARMA_API.Contracts.CreditPayment",
+        "IsRequired": true
+      },
+      {
+        "Name": "hardDelete",
+        "Type": "System.Boolean",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.CreditPaymentController",
+    "Method": "GetCreditPayment",
+    "RelativePath": "CreditPayment/GetCreditPayment/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.CreditPaymentController",
+    "Method": "GetListCreditPayment",
+    "RelativePath": "CreditPayment/GetListCreditPayment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "filter",
+        "Type": "ANIMALITOS_PHARMA_API.Contracts.CreditPaymentFilter",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.CreditPaymentController",
+    "Method": "UpdateCreditPayment",
+    "RelativePath": "CreditPayment/UpdateCreditPayment",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "creditPayment",
+        "Type": "ANIMALITOS_PHARMA_API.Contracts.CreditPayment",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.EmployeeController",
     "Method": "CreateEmployee",
     "RelativePath": "Employee/CreateEmployee",
@@ -451,6 +536,261 @@
       {
         "Name": "inventoryItem",
         "Type": "InventoryItem",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.LoadController",
+    "Method": "CreateLoad",
+    "RelativePath": "Load/CreateLoad",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "load",
+        "Type": "Load",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.LoadController",
+    "Method": "DeleteLoad",
+    "RelativePath": "Load/DeleteLoad/{hardDelete}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "load",
+        "Type": "Load",
+        "IsRequired": true
+      },
+      {
+        "Name": "hardDelete",
+        "Type": "System.Boolean",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.LoadController",
+    "Method": "GetListLoad",
+    "RelativePath": "Load/GetListLoad",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "filter",
+        "Type": "LoadFilter",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.LoadController",
+    "Method": "GetLoad",
+    "RelativePath": "Load/GetLoad/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.LoadController",
+    "Method": "UpdateLoad",
+    "RelativePath": "Load/UpdateLoad",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "load",
+        "Type": "Load",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.LoadsContentController",
+    "Method": "CreateLoadContent",
+    "RelativePath": "LoadContent/CreateLoadContent",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loadContent",
+        "Type": "ANIMALITOS_PHARMA_API.Contracts.LoadsContent",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.LoadsContentController",
+    "Method": "DeleteLoad",
+    "RelativePath": "LoadContent/DeleteLoadContent/{hardDelete}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loadContent",
+        "Type": "ANIMALITOS_PHARMA_API.Contracts.LoadsContent",
+        "IsRequired": true
+      },
+      {
+        "Name": "hardDelete",
+        "Type": "System.Boolean",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.LoadsContentController",
+    "Method": "GetListLoadContent",
+    "RelativePath": "LoadContent/GetListLoadContent",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "filter",
+        "Type": "ANIMALITOS_PHARMA_API.Contracts.LoadsContentFilter",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.LoadsContentController",
+    "Method": "GetLoadContent",
+    "RelativePath": "LoadContent/GetLoadContent/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.LoadsContentController",
+    "Method": "UpdateLoadContent",
+    "RelativePath": "LoadContent/UpdateLoadContent",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loadContent",
+        "Type": "ANIMALITOS_PHARMA_API.Contracts.LoadsContent",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.Notifications",
+    "Method": "CreateNotification",
+    "RelativePath": "Notifications/CreateNotification",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "notification",
+        "Type": "Notification",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.Notifications",
+    "Method": "DeleteNotification",
+    "RelativePath": "Notifications/DeleteNotification/{hardDelete}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "notification",
+        "Type": "Notification",
+        "IsRequired": true
+      },
+      {
+        "Name": "hardDelete",
+        "Type": "System.Boolean",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.Notifications",
+    "Method": "GetListNotifications",
+    "RelativePath": "Notifications/GetListNotifications",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "filter",
+        "Type": "NotificationFilter",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.Notifications",
+    "Method": "GetNotification",
+    "RelativePath": "Notifications/GetNotification/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.Notifications",
+    "Method": "UpdateNotification",
+    "RelativePath": "Notifications/UpdateNotification",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "notification",
+        "Type": "Notification",
         "IsRequired": true
       }
     ],
@@ -700,6 +1040,22 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.ProductLotController",
+    "Method": "LoadProductsLotTable",
+    "RelativePath": "ProductLot/LoadProductsLotTable",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productLot",
+        "Type": "ProductLot",
         "IsRequired": true
       }
     ],

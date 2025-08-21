@@ -90,6 +90,26 @@ namespace ANIMALITOS_PHARMA_API.Accessors
             return ConvertProductLot_ToAccessorContract(objTemp);
         }
 
+        public IEnumerable<dynamic> LoadProductsLotTable()
+        {
+            var lotsWithInventorys =
+                from item in _EntityContext.InventoryItems
+                join lot in _EntityContext.ProductLots on item.ProductLotId equals lot.Id
+                join product in _EntityContext.Products on item.ProductId equals product.Id
+                group item by new { lot.Id, lot.Expiration, product.Name, lot.DateReceipt, lot.StatusId } into g
+                select new
+                {
+                    productLotId = g.Key.Id,
+                    productName = g.Key.Name,
+                    g.Key.Expiration,
+                    g.Key.DateReceipt,
+                    quantityProducts = g.Count(),
+                    statusId = g.Key.StatusId
+                };
+
+            return lotsWithInventorys;
+        }
+
         private ProductLot ConvertProductLot_ToAccessorContract(Models.ProductLot tempitem)
         {
             var newObj = new ProductLot
