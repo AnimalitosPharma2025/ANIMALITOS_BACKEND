@@ -58,9 +58,9 @@ namespace ANIMALITOS_PHARMA_API.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("/ProductLot/LoadProductsLotTable")]
-        public IActionResult LoadProductsLotTable(ProductLot productLot)
+        public IActionResult LoadProductsLotTable()
         {
             try
             {

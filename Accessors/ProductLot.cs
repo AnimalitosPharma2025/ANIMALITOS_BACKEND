@@ -99,7 +99,7 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 group item by new { lot.Id, lot.Expiration, product.Name, lot.DateReceipt, lot.StatusId } into g
                 select new
                 {
-                    productLotId = g.Key.Id,
+                    id = g.Key.Id,
                     productName = g.Key.Name,
                     g.Key.Expiration,
                     g.Key.DateReceipt,
