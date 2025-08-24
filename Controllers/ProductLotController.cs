@@ -1,4 +1,5 @@
 using ANIMALITOS_PHARMA_API.Accessors;
+using ANIMALITOS_PHARMA_API.Contract.ContractPersonalized;
 using ANIMALITOS_PHARMA_API.Controllers.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
@@ -67,6 +68,22 @@ namespace ANIMALITOS_PHARMA_API.Controllers
                 accessor.Login((string)ApiHelpers.AuthorizationUser(Request));
                 var obj = accessor.LoadProductsLotTable();
                 return ApiHelpers.CreateSuccessResult(obj, nameof(LoadProductsLotTable));
+            }
+            catch (Exception ex)
+            {
+                return ApiHelpers.CreateBadResult(ex);
+            }
+        }
+
+        [HttpPost]
+        [Route("/ProductLot/CreateProductLotWithInventoryItems")]
+        public IActionResult CreateProductLotWithInventoryItems([FromBody] CreateProductLotRequest request)
+        {
+            try
+            {
+                accessor.Login((string)ApiHelpers.AuthorizationUser(Request));
+                var obj = accessor.CreateProductLotWithInventoryItems(request.ProductLot, request.InventoryItem, request.QuantityItems);
+                return ApiHelpers.CreateSuccessResult(obj, nameof(CreateProductLotWithInventoryItems));
             }
             catch (Exception ex)
             {

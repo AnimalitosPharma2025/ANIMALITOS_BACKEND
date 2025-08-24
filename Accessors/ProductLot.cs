@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using XAct;
 
 namespace ANIMALITOS_PHARMA_API.Accessors
 {
@@ -108,6 +109,29 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 };
 
             return lotsWithInventorys;
+        }
+
+        public dynamic CreateProductLotWithInventoryItems(ProductLot productLot, InventoryItem inventoryItem, int quantityItems)
+        {
+            var newProductLot = _EntityContext.ProductLots.Add(ConvertProductLot_ToAccessorModel(productLot));
+            _EntityContext.SaveChanges();
+            var inventoryItemsCreatedList = new List<InventoryItem>();
+
+            inventoryItem.ProductLotId = newProductLot.Entity.Id;
+            for (int item = 0; item < quantityItems; item++)
+            {
+                var itemCreated = ConvertInventoryItem_ToAccessorModel(inventoryItem);
+                _EntityContext.InventoryItems.Add(itemCreated);
+                _EntityContext.SaveChanges();
+                inventoryItemsCreatedList.Add(ConvertInventoryItem_ToAccessorContract(itemCreated));
+            }
+
+            dynamic result = new
+            {
+                productLotId = productLot.Id,
+                inventoryItemsCreatedList,
+            };
+            return result;
         }
 
         private ProductLot ConvertProductLot_ToAccessorContract(Models.ProductLot tempitem)

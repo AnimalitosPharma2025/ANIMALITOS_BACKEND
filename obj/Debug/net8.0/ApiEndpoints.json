@@ -994,6 +994,22 @@
   },
   {
     "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.ProductLotController",
+    "Method": "CreateProductLotWithInventoryItems",
+    "RelativePath": "ProductLot/CreateProductLotWithInventoryItems",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ANIMALITOS_PHARMA_API.Contract.ContractPersonalized.CreateProductLotRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.ProductLotController",
     "Method": "DeleteProductLot",
     "RelativePath": "ProductLot/DeleteProductLot/{hardDelete}",
     "HttpMethod": "DELETE",
@@ -1049,16 +1065,10 @@
     "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.ProductLotController",
     "Method": "LoadProductsLotTable",
     "RelativePath": "ProductLot/LoadProductsLotTable",
-    "HttpMethod": "POST",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "productLot",
-        "Type": "ProductLot",
-        "IsRequired": true
-      }
-    ],
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
