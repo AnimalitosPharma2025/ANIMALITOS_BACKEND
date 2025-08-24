@@ -97,16 +97,26 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 from item in _EntityContext.InventoryItems
                 join lot in _EntityContext.ProductLots on item.ProductLotId equals lot.Id
                 join product in _EntityContext.Products on item.ProductId equals product.Id
-                group item by new { lot.Id, lot.Expiration, product.Name, lot.DateReceipt, lot.StatusId } into g
+                group item by new
+                {
+                    lot.Id,
+                    lot.Expiration,
+                    ProductId = product.Id,
+                    product.Name,
+                    lot.DateReceipt,
+                    lot.StatusId
+                } into g
                 select new
                 {
                     id = g.Key.Id,
+                    productId = g.Key.ProductId,
                     productName = g.Key.Name,
                     g.Key.Expiration,
                     g.Key.DateReceipt,
                     quantityProducts = g.Count(),
                     statusId = g.Key.StatusId
                 };
+
 
             return lotsWithInventorys;
         }
