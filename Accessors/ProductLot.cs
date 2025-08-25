@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Collections.ObjectModel;
 using XAct;
 
 namespace ANIMALITOS_PHARMA_API.Accessors
@@ -142,6 +143,62 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 inventoryItemsCreatedList,
             };
             return result;
+        }
+
+        public dynamic UpdateProductLotWithInventoryItems(ProductLot productLot, InventoryItem inventoryItem, int quantityItemsUpdated)
+        {
+            var lotsWithInventorys =
+                from item in _EntityContext.InventoryItems.AsNoTracking() where item.ProductLotId == productLot.Id select item;
+
+            int quantityLoops = 0;
+
+            var listInventorys = lotsWithInventorys.Map(o =>
+            {
+                return new InventoryItem
+                {
+                    Id = o.Id,
+                    ProductId = o.ProductId,
+                    ProductLotId = o.ProductLotId,
+                    EmployeeId = o.EmployeeId,
+                    StatusId = o.StatusId
+                };
+            }).ToList();
+
+            if (lotsWithInventorys.Count() > quantityItemsUpdated)
+            {
+                quantityLoops = lotsWithInventorys.Count() - quantityItemsUpdated;
+                for (int i = 0; i < quantityLoops; i++)
+                {
+                    _EntityContext.InventoryItems.Remove(ConvertInventoryItem_ToAccessorModel(listInventorys[i]));
+                }
+            }
+
+            if (lotsWithInventorys.Count() < quantityItemsUpdated)
+            {
+                quantityLoops = quantityItemsUpdated - lotsWithInventorys.Count();
+                var lastInventory = listInventorys.Last();
+
+                for (int i = 0; i < quantityLoops; i++)
+                {
+                    _EntityContext.InventoryItems.Add(new Models.InventoryItem
+                    {
+                        ProductId = lastInventory.ProductId,
+                        ProductLotId = lastInventory.ProductLotId,
+                        EmployeeId = lastInventory.EmployeeId,
+                        StatusId = lastInventory.StatusId
+                    });
+                }
+            }
+
+            _EntityContext.ProductLots.Update(ConvertProductLot_ToAccessorModel(productLot));
+            _EntityContext.SaveChanges();
+
+            dynamic oli = new
+            {
+                listInventorys
+            };
+
+            return oli;
         }
 
         private ProductLot ConvertProductLot_ToAccessorContract(Models.ProductLot tempitem)
