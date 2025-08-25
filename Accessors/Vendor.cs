@@ -56,7 +56,7 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                         vendor.Id,
                         vendor.Name,
                         Status = vendor.StatusId,
-                        Address = address // objeto completo de AddressBook
+                        Address = address
                       }
                ).ToList();
 

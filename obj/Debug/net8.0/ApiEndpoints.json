@@ -187,6 +187,16 @@
   },
   {
     "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.ClientController",
+    "Method": "LoadClientTable",
+    "RelativePath": "Client/LoadClientTable",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.ClientController",
     "Method": "UpdateClient",
     "RelativePath": "Client/UpdateClient",
     "HttpMethod": "PUT",

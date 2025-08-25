@@ -36,6 +36,24 @@ namespace ANIMALITOS_PHARMA_API.Accessors
             return context;
         }
 
+        public IEnumerable<dynamic> LoadClientTable()
+        {
+            var clientWithAddress = (
+                from client in _EntityContext.Clients
+                join address in _EntityContext.AddressBooks
+                    on client.AddressId equals address.Id
+                select new
+                {
+                    client.Id,
+                    client.Name,
+                    Status = client.StatusId,
+                    Address = address
+                }
+               ).ToList();
+
+            return clientWithAddress;
+        }
+
         public Client GetClient(int id)
         {
             if (id <= 0)
