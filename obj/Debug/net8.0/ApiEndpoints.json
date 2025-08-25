@@ -1031,6 +1031,22 @@
   },
   {
     "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.ProductLotController",
+    "Method": "DeleteProductLotAndInventoryItems",
+    "RelativePath": "ProductLot/DeleteProductLotAndInventoryItems",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productLot",
+        "Type": "ProductLot",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.ProductLotController",
     "Method": "GetListProductLot",
     "RelativePath": "ProductLot/GetListProductLot",
     "HttpMethod": "POST",

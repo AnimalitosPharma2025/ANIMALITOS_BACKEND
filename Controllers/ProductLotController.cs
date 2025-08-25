@@ -107,6 +107,22 @@ namespace ANIMALITOS_PHARMA_API.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("/ProductLot/DeleteProductLotAndInventoryItems")]
+        public IActionResult DeleteProductLotAndInventoryItems(ProductLot productLot)
+        {
+            try
+            {
+                accessor.Login((string)ApiHelpers.AuthorizationUser(Request));
+                var obj = accessor.DeleteProductLotAndInventoryItems(productLot);
+                return ApiHelpers.CreateSuccessResult(obj, nameof(DeleteProductLotAndInventoryItems));
+            }
+            catch (Exception ex)
+            {
+                return ApiHelpers.CreateBadResult(ex);
+            }
+        }
+
         [HttpPut]
         [Route("/ProductLot/UpdateProductLot")]
         public IActionResult UpdateProductLot(ProductLot productLot)

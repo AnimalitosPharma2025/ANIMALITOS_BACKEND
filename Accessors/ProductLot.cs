@@ -1,3 +1,4 @@
+using ANIMALITOS_PHARMA_API.Accessors.Util.StatusEnumerable;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using XAct;
@@ -151,7 +152,6 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 from item in _EntityContext.InventoryItems.AsNoTracking() where item.ProductLotId == productLot.Id select item;
 
             int quantityLoops = 0;
-
             var listInventorys = lotsWithInventorys.Map(o =>
             {
                 return new InventoryItem
@@ -201,6 +201,23 @@ namespace ANIMALITOS_PHARMA_API.Accessors
             return oli;
         }
 
+        public ProductLot DeleteProductLotAndInventoryItems(ProductLot productLot)
+        {
+            var lotsWithInventorys =
+                from item in _EntityContext.InventoryItems.AsNoTracking() where item.ProductLotId == productLot.Id select item;
+
+            productLot.StatusId = (int)ObjectStatus.INACTIVE;
+            _EntityContext.Update(ConvertProductLot_ToAccessorModel(productLot));
+
+            foreach (var item in lotsWithInventorys)
+            {
+                item.StatusId = (int)ObjectStatus.INACTIVE;
+                _EntityContext.InventoryItems.Update(item);
+            }
+
+            _EntityContext.SaveChanges();
+            return productLot;
+        }
         private ProductLot ConvertProductLot_ToAccessorContract(Models.ProductLot tempitem)
         {
             var newObj = new ProductLot
