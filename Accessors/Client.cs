@@ -47,6 +47,7 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                     Id = c.Id,
                     Name = c.Name,
                     CreditLimit = (decimal)c.CreditLimit,
+                    StatusId = c.StatusId,
                     Address = c.Address != null ? new AddressDTO
                     {
                         Id = c.Address.Id,
