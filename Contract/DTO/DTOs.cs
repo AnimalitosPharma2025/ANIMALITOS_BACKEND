@@ -1,0 +1,35 @@
+﻿namespace ANIMALITOS_PHARMA_API.Contract.DTO
+{
+    public class ClientDTO
+    {
+        public int Id { get; set; }
+        public string? Name { get; set; }
+        public decimal CreditLimit { get; set; }
+        public AddressDTO? Address { get; set; }
+        public List<CreditDTO> Credits { get; set; } = new();
+    }
+
+    public class AddressDTO
+    {
+        public string? Direction { get; set; }
+        public string? Phone { get; set; }
+        public string? Email { get; set; }
+        public string? Rfc { get; set; }
+    }
+
+    public class CreditDTO
+    {
+        public int Id { get; set; }
+        public DateTime PurchaseDate { get; set; }
+        public DateTime? ExpirationDate { get; set; }
+        public decimal TotalDebt { get; set; }
+        public List<PaymentDTO> Payments { get; set; } = new();
+    }
+
+    public class PaymentDTO
+    {
+        public int Id { get; set; }
+        public decimal PaymentAmount { get; set; }
+        public DateTime PaymentDate { get; set; }
+    }
+}

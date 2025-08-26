@@ -19,5 +19,7 @@ public partial class Credit
 
     public double? TotalDebt { get; set; }
 
+    public virtual Client? Client { get; set; }
+
     public virtual Status Status { get; set; } = null!;
 }

@@ -1,3 +1,4 @@
+using ANIMALITOS_PHARMA_API.Contract.DTO;
 using Microsoft.EntityFrameworkCore;
 using XAct;
 
@@ -39,44 +40,48 @@ namespace ANIMALITOS_PHARMA_API.Accessors
 
         public IEnumerable<dynamic> LoadClientTable()
         {
-            var clientWithAddress = from c in _EntityContext.Clients
-                                    join ab in _EntityContext.AddressBooks on c.AddressId equals ab.Id into abJoin
-                                    from ab in abJoin.DefaultIfEmpty() // LEFT JOIN
-                                    join cr in _EntityContext.Credits on c.Id equals cr.ClientId into crJoin
-                                    from cr in crJoin.DefaultIfEmpty()
-                                    join cp in _EntityContext.CreditPayments on cr.Id equals cp.CreditId into cpJoin
-                                    from cp in cpJoin.DefaultIfEmpty()
-                                    orderby c.Id, cr.Id, cp.PaymentDate
-                                    select new
-                                    {
-                                        ClientId = c.Id,
-                                        ClientName = c.Name,
-                                        c.CreditLimit,
-                                        Address = new
-                                        {
-                                            ab.Direction,
-                                            ab.Phone,
-                                            ab.Email,
-                                            ab.Rfc
-                                        },
-                                        Credit = cr == null ? null : new
-                                        {
-                                            cr.Id,
-                                            cr.PurchaseDate,
-                                            cr.ExpirationDate,
-                                            //cr.TotalDebt,
-                                            Payments = cp == null ? new List<object>() : new List<object>
-                    {
-                        new {
-                            cp.Id,
-                            cp.PaymentAmount,
-                            cp.PaymentDate
-                        }
-                    }
-                                        }
-                                    };
+            //        var clients = _EntityContext.Clients
+            //.Include(c => c.Address)
+            //.Include(c => c.Credits)
+            //    .ThenInclude(cr => cr.CreditPayments)
+            //.Select(c => new ClientDTO
+            //{
+            //    Id = c.Id,
+            //    Name = c.Name,
+            //    CreditLimit = c.CreditLimit,
+            //    Address = c.Address == null ? null : new AddressDTO
+            //    {
+            //        Direction = c.Address.Direction,
+            //        Phone = c.Address.Phone,
+            //        Email = c.Address.Email,
+            //        Rfc = c.Address.Rfc
+            //    },
+            //    Credits = c.Credits.Select(cr => new CreditDTO
+            //    {
+            //        Id = cr.Id,
+            //        PurchaseDate = cr.PurchaseDate,
+            //        ExpirationDate = cr.ExpirationDate,
+            //        TotalDebt = cr.TotalDebt,
+            //        Payments = cr.CreditPayments.Select(cp => new PaymentDTO
+            //        {
+            //            Id = cp.Id,
+            //            PaymentAmount = cp.PaymentAmount,
+            //            PaymentDate = cp.PaymentDate
+            //        }).ToList()
+            //    }).ToList()
+            //})
+            //.OrderBy(c => c.Id)
+            //.ToList();
 
-            return clientWithAddress;
+
+
+            //        return clientWithAddress;
+
+            dynamic o = new
+            {
+
+            };
+            return o;
         }
 
         public Client GetClient(int id)

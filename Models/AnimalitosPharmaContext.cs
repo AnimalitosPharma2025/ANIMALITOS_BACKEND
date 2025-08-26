@@ -17,6 +17,7 @@ public partial class AnimalitosPharmaContext : DbContext
     {
     }
 
+
     public virtual DbSet<AddressBook> AddressBooks { get; set; }
 
     public virtual DbSet<Client> Clients { get; set; }
@@ -138,6 +139,10 @@ public partial class AnimalitosPharmaContext : DbContext
                 .HasColumnName("PURCHASE_DATE");
             entity.Property(e => e.StatusId).HasColumnName("STATUS_ID");
             entity.Property(e => e.TotalDebt).HasColumnName("TOTAL_DEBT");
+
+            entity.HasOne(d => d.Client).WithMany(p => p.Credits)
+                .HasForeignKey(d => d.ClientId)
+                .HasConstraintName("FK_CREDITS_CLIENTS");
 
             entity.HasOne(d => d.Status).WithMany(p => p.Credits)
                 .HasForeignKey(d => d.StatusId)
