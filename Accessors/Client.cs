@@ -1,4 +1,5 @@
 using ANIMALITOS_PHARMA_API.Contract.DTO;
+using ANIMALITOS_PHARMA_API.Contracts;
 using Microsoft.EntityFrameworkCore;
 using XAct;
 
@@ -48,6 +49,7 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                     CreditLimit = (decimal)c.CreditLimit,
                     Address = c.Address != null ? new AddressDTO
                     {
+                        Id = c.Address.Id,
                         Direction = c.Address.Direction,
                         Phone = c.Address.Phone,
                         Email = c.Address.Email,
