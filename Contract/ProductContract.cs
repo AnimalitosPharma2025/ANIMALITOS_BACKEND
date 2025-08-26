@@ -14,6 +14,10 @@ public class Product
 
     public string Code { get; set; } = "";
 
+    public string? ImageUrl { get; set; } = "";
+
+    public double? Discount { get; set; } = 0;
+
     public int VendorId { get; set; } = 0;
 
     public int StatusId { get; set; } = 0;
@@ -38,6 +42,10 @@ public class ProductFilter
     public int StatusId { get; set; } = 0;
 
     public string Code { get; set; } = "";
+
+    public string? ImageUrl { get; set; } = "";
+
+    public double? Discount { get; set; } = 0;
 
     public string SortColumn { get; set; } = "";
 

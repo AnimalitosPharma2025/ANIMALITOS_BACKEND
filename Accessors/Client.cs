@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using XAct;
 
 namespace ANIMALITOS_PHARMA_API.Accessors
 {
@@ -38,18 +39,42 @@ namespace ANIMALITOS_PHARMA_API.Accessors
 
         public IEnumerable<dynamic> LoadClientTable()
         {
-            var clientWithAddress = (
-                from client in _EntityContext.Clients
-                join address in _EntityContext.AddressBooks
-                    on client.AddressId equals address.Id
-                select new
-                {
-                    client.Id,
-                    client.Name,
-                    Status = client.StatusId,
-                    Address = address
-                }
-               ).ToList();
+            var clientWithAddress = from c in _EntityContext.Clients
+                                    join ab in _EntityContext.AddressBooks on c.AddressId equals ab.Id into abJoin
+                                    from ab in abJoin.DefaultIfEmpty() // LEFT JOIN
+                                    join cr in _EntityContext.Credits on c.Id equals cr.ClientId into crJoin
+                                    from cr in crJoin.DefaultIfEmpty()
+                                    join cp in _EntityContext.CreditPayments on cr.Id equals cp.CreditId into cpJoin
+                                    from cp in cpJoin.DefaultIfEmpty()
+                                    orderby c.Id, cr.Id, cp.PaymentDate
+                                    select new
+                                    {
+                                        ClientId = c.Id,
+                                        ClientName = c.Name,
+                                        c.CreditLimit,
+                                        Address = new
+                                        {
+                                            ab.Direction,
+                                            ab.Phone,
+                                            ab.Email,
+                                            ab.Rfc
+                                        },
+                                        Credit = cr == null ? null : new
+                                        {
+                                            cr.Id,
+                                            cr.PurchaseDate,
+                                            cr.ExpirationDate,
+                                            //cr.TotalDebt,
+                                            Payments = cp == null ? new List<object>() : new List<object>
+                    {
+                        new {
+                            cp.Id,
+                            cp.PaymentAmount,
+                            cp.PaymentDate
+                        }
+                    }
+                                        }
+                                    };
 
             return clientWithAddress;
         }

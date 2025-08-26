@@ -10,6 +10,8 @@ public class Credit
 
     public bool? AuthorizeCredit { get; set; } = false;
 
+    public double? TotalDebt { get; set; } = 0;
+
     public int? ClientId { get; set; } = 0;
 }
 
@@ -26,6 +28,8 @@ public class CreditFilter
     public int StatusId { get; set; } = 0;
 
     public bool? AuthorizeCredit { get; set; } = false;
+
+    public double? TotalDebt { get; set; } = 0;
 
     public int? ClientId { get; set; } = 0;
 

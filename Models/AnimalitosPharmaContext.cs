@@ -16,6 +16,7 @@ public partial class AnimalitosPharmaContext : DbContext
         : base(options)
     {
     }
+
     public virtual DbSet<AddressBook> AddressBooks { get; set; }
 
     public virtual DbSet<Client> Clients { get; set; }
@@ -136,6 +137,7 @@ public partial class AnimalitosPharmaContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("PURCHASE_DATE");
             entity.Property(e => e.StatusId).HasColumnName("STATUS_ID");
+            entity.Property(e => e.TotalDebt).HasColumnName("TOTAL_DEBT");
 
             entity.HasOne(d => d.Status).WithMany(p => p.Credits)
                 .HasForeignKey(d => d.StatusId)
@@ -347,6 +349,7 @@ public partial class AnimalitosPharmaContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("DESCRIPTION");
+            entity.Property(e => e.Discount).HasColumnName("DISCOUNT");
             entity.Property(e => e.ImageUrl)
                 .IsUnicode(false)
                 .HasColumnName("IMAGE_URL");
