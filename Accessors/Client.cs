@@ -61,6 +61,7 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                             PurchaseDate = cr.PurchaseDate,
                             ExpirationDate = cr.ExpirationDate,
                             TotalDebt = (decimal)(cr.TotalDebt ?? 0),
+                            StatusId = cr.StatusId,
                             Payments = _EntityContext.CreditPayments
                                 .Where(cp => cp.CreditId == cr.Id)
                                 .Select(cp => new PaymentDTO

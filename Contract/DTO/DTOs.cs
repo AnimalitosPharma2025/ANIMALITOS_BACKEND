@@ -23,6 +23,7 @@
         public DateTime PurchaseDate { get; set; }
         public DateTime? ExpirationDate { get; set; }
         public decimal TotalDebt { get; set; }
+        public int StatusId { get; set; }
         public List<PaymentDTO> Payments { get; set; } = new();
     }
 
