@@ -115,7 +115,7 @@ namespace ANIMALITOS_PHARMA_API.Accessors
 
             objTemp.Id = obj.Id;
             objTemp.Name = obj.Name;
-            objTemp.CreditLimit = obj.CreditLimit;
+            objTemp.CreditLimit = (double)obj.CreditLimit;
             objTemp.AddressId = obj.AddressId;
             objTemp.StatusId = obj.StatusId;
 
@@ -160,7 +160,7 @@ namespace ANIMALITOS_PHARMA_API.Accessors
             {
                 Id = tempitem.Id,
                 Name = tempitem.Name,
-                CreditLimit = tempitem.CreditLimit,
+                CreditLimit = (double)tempitem.CreditLimit,
                 AddressId = tempitem.AddressId,
                 StatusId = tempitem.StatusId
             };

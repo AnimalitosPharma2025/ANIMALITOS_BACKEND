@@ -9,7 +9,7 @@ public partial class Client
 
     public string Name { get; set; } = null!;
 
-    public double? CreditLimit { get; set; }
+    public double CreditLimit { get; set; }
 
     public int? AddressId { get; set; }
 

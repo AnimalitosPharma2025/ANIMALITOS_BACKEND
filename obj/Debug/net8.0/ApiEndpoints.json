@@ -452,6 +452,16 @@
   },
   {
     "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.EmployeeController",
+    "Method": "LoadEmployeeTable",
+    "RelativePath": "Employee/LoadEmployeeTable",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.EmployeeController",
     "Method": "UpdateEmployee",
     "RelativePath": "Employee/UpdateEmployee",
     "HttpMethod": "PUT",

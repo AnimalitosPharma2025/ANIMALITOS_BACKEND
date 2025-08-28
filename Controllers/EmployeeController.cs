@@ -1,5 +1,6 @@
 using ANIMALITOS_PHARMA_API.Accessors;
 using ANIMALITOS_PHARMA_API.Controllers.Helpers;
+using ANIMALITOS_PHARMA_API.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ANIMALITOS_PHARMA_API.Controllers
@@ -34,6 +35,22 @@ namespace ANIMALITOS_PHARMA_API.Controllers
                 accessor.Login((string)ApiHelpers.AuthorizationUser(Request));
                 var obj = accessor.GetListEmployee(filter);
                 return ApiHelpers.CreateSuccessResult(obj, nameof(GetListEmployee));
+            }
+            catch (Exception ex)
+            {
+                return ApiHelpers.CreateBadResult(ex);
+            }
+        }
+
+        [HttpGet]
+        [Route("/Employee/LoadEmployeeTable")]
+        public IActionResult LoadEmployeeTable()
+        {
+            try
+            {
+                accessor.Login((string)ApiHelpers.AuthorizationUser(Request));
+                var obj = accessor.LoadEmployeeTable();
+                return ApiHelpers.CreateSuccessResult(obj, nameof(LoadEmployeeTable));
             }
             catch (Exception ex)
             {

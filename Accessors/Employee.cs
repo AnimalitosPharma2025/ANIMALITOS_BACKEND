@@ -1,3 +1,4 @@
+using ANIMALITOS_PHARMA_API.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ANIMALITOS_PHARMA_API.Accessors
@@ -52,6 +53,23 @@ namespace ANIMALITOS_PHARMA_API.Accessors
             return ConvertEmployee_ToAccessorContract(objTemp);
         }
 
+        public IEnumerable<dynamic> LoadEmployeeTable()
+        {
+            var employeeObjectTable = _EntityContext.Employees
+                .Include(e => e.Address)
+                .Select(e => new
+                {
+                    e.Id,
+                    e.Name,
+                    e.LastName,
+                    e.Rol,
+                    e.Address,
+                    e.StatusId,
+                })
+                .ToList();
+
+            return employeeObjectTable;
+        }
         public Employee CreateEmployee(Employee obj)
         {
             var newObj = ConvertEmployee_ToAccessorModel(obj);
