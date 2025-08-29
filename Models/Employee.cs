@@ -21,6 +21,10 @@ public partial class Employee
 
     public virtual AddressBook? Address { get; set; }
 
+    public virtual ICollection<CreditPayment> CreditPayments { get; set; } = new List<CreditPayment>();
+
+    public virtual ICollection<Credit> Credits { get; set; } = new List<Credit>();
+
     public virtual ICollection<InventoryItem> InventoryItems { get; set; } = new List<InventoryItem>();
 
     public virtual ICollection<Load> Loads { get; set; } = new List<Load>();

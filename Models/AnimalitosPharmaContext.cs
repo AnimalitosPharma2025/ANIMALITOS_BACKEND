@@ -17,7 +17,6 @@ public partial class AnimalitosPharmaContext : DbContext
     {
     }
 
-
     public virtual DbSet<AddressBook> AddressBooks { get; set; }
 
     public virtual DbSet<Client> Clients { get; set; }
@@ -131,9 +130,11 @@ public partial class AnimalitosPharmaContext : DbContext
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.AuthorizeCredit).HasColumnName("AUTHORIZE_CREDIT");
             entity.Property(e => e.ClientId).HasColumnName("CLIENT_ID");
+            entity.Property(e => e.EmployeeId).HasColumnName("EMPLOYEE_ID");
             entity.Property(e => e.ExpirationDate)
                 .HasColumnType("datetime")
                 .HasColumnName("EXPIRATION_DATE");
+            entity.Property(e => e.IsSale).HasColumnName("IS_SALE");
             entity.Property(e => e.PurchaseDate)
                 .HasColumnType("datetime")
                 .HasColumnName("PURCHASE_DATE");
@@ -143,6 +144,10 @@ public partial class AnimalitosPharmaContext : DbContext
             entity.HasOne(d => d.Client).WithMany(p => p.Credits)
                 .HasForeignKey(d => d.ClientId)
                 .HasConstraintName("FK_CREDITS_CLIENTS");
+
+            entity.HasOne(d => d.Employee).WithMany(p => p.Credits)
+                .HasForeignKey(d => d.EmployeeId)
+                .HasConstraintName("FK_CREDITS_EMPLOYEES");
 
             entity.HasOne(d => d.Status).WithMany(p => p.Credits)
                 .HasForeignKey(d => d.StatusId)
@@ -158,11 +163,16 @@ public partial class AnimalitosPharmaContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.CreditId).HasColumnName("CREDIT_ID");
+            entity.Property(e => e.EmployeeId).HasColumnName("EMPLOYEE_ID");
             entity.Property(e => e.PaymentAmount).HasColumnName("PAYMENT_AMOUNT");
             entity.Property(e => e.PaymentDate)
                 .HasColumnType("datetime")
                 .HasColumnName("PAYMENT_DATE");
             entity.Property(e => e.StatusId).HasColumnName("STATUS_ID");
+
+            entity.HasOne(d => d.Employee).WithMany(p => p.CreditPayments)
+                .HasForeignKey(d => d.EmployeeId)
+                .HasConstraintName("FK_CREDIT_PAYMENTS_EMPLOYEES");
 
             entity.HasOne(d => d.Status).WithMany(p => p.CreditPayments)
                 .HasForeignKey(d => d.StatusId)

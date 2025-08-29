@@ -15,5 +15,9 @@ public partial class CreditPayment
 
     public int? StatusId { get; set; }
 
+    public int? EmployeeId { get; set; }
+
+    public virtual Employee? Employee { get; set; }
+
     public virtual Status? Status { get; set; }
 }
