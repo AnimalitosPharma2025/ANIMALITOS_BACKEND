@@ -71,7 +71,13 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                                 {
                                     Id = cp.Id,
                                     PaymentAmount = (decimal)cp.PaymentAmount,
-                                    PaymentDate = (DateTime)cp.PaymentDate
+                                    PaymentDate = (DateTime)cp.PaymentDate,
+                                    Employee = c.Address != null ? new EmployeeDTO
+                                    {
+                                        Id = cp.Employee.Id,
+                                        Name = cp.Employee.Name,
+                                        LastName = cp.Employee.LastName
+                                    } : null
                                 })
                                 .ToList()
                         })

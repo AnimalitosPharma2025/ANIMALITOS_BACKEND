@@ -29,11 +29,18 @@
         public int StatusId { get; set; }
         public List<PaymentDTO> Payments { get; set; } = new();
     }
+    public class EmployeeDTO
+    {
+        public int? Id { get; set; }
+        public string Name { get; set; } = null!;
+        public string LastName { get; set; } = null!;
+    }
 
     public class PaymentDTO
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public decimal PaymentAmount { get; set; }
         public DateTime PaymentDate { get; set; }
+        public EmployeeDTO? Employee { get; set; }
     }
 }
