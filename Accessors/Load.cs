@@ -36,6 +36,35 @@ namespace ANIMALITOS_PHARMA_API.Accessors
             return context;
         }
 
+        public IEnumerable<dynamic> ConstructTableLoads()
+        {
+            var loads = _EntityContext.Loads
+                .Include(l => l.Employee)
+                .Include(l => l.Status)
+                .Include(l => l.LoadsContents)
+                    .ThenInclude(lc => lc.Inventory)
+                        .ThenInclude(inv => inv.Product)
+                .Include(l => l.LoadsContents)
+                    .ThenInclude(lc => lc.Inventory)
+                        .ThenInclude(inv => inv.ProductLot)
+                .Select(l => new
+                {
+                    LoadId = l.Id,
+                    Employee = l.Employee != null ? l.Employee.Name : "Sin asignar",
+                    Status = l.Status != null ? l.Status.Name : "N/A",
+                    Contents = l.LoadsContents.Select(lc => new
+                    {
+                        ProductName = lc.Inventory!.Product.Name,
+                        LotNumber = lc.Inventory.ProductLot.Id,
+                        ExpirationDate = lc.Inventory.ProductLot.Expiration
+                    }),
+                    Quantity = l.LoadsContents.Count()
+                })
+                .ToList();
+
+            return loads;
+        }
+
         public Load GetLoad(int id)
         {
             if (id <= 0)

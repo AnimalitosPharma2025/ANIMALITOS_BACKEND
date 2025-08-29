@@ -563,6 +563,16 @@
   },
   {
     "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.LoadController",
+    "Method": "ConstructTableLoads",
+    "RelativePath": "Load/ConstructTableLoads",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.LoadController",
     "Method": "CreateLoad",
     "RelativePath": "Load/CreateLoad",
     "HttpMethod": "POST",

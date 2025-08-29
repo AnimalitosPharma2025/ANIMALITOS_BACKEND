@@ -22,4 +22,8 @@ public partial class InventoryItem
     public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
 
     public virtual Status Status { get; set; } = null!;
+
+    public virtual Product Product { get; set; } = null!;
+
+    public virtual ProductLot ProductLot { get; set; } = null!;
 }
