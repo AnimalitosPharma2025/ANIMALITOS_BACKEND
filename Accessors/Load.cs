@@ -50,14 +50,21 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 .Select(l => new
                 {
                     LoadId = l.Id,
-                    Employee = l.Employee != null ? l.Employee.Name : "Sin asignar",
-                    Status = l.Status != null ? l.Status.Name : "N/A",
+                    l.EmployeeId,
+                    l.CreatedDate,
+                    EmployeeName = l.Employee != null ? l.Employee.Name : "Sin asignar",
+                    StatusId = l.Status != null ? l.Status.Id : 0,
                     Contents = l.LoadsContents.Select(lc => new
                     {
                         ProductName = lc.Inventory!.Product.Name,
                         LotNumber = lc.Inventory.ProductLot.Id,
-                        ExpirationDate = lc.Inventory.ProductLot.Expiration
+                        ExpirationDate = lc.Inventory.ProductLot.Expiration,
+                        UnitPrice = lc.Inventory.Product.UnitPrice,
+                        Discount = lc.Inventory.Product.Discount ?? 0
                     }),
+                    l.LoadValue,
+                    LoadWithDiscount = l.LoadsContents.Sum(lc =>
+                        lc.Inventory!.Product.UnitPrice - (lc.Inventory.Product.UnitPrice * (lc.Inventory.Product.Discount ?? 0))),
                     Quantity = l.LoadsContents.Count()
                 })
                 .ToList();
