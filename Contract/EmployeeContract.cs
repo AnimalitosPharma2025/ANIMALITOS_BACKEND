@@ -19,9 +19,9 @@ public class EmployeeFilter
 {
     public int Id { get; set; } = 0;
 
-    public string Name { get; set; } = null!;
+    public string Name { get; set; } = "";
 
-    public string LastName { get; set; } = null!;
+    public string LastName { get; set; } = "";
 
     public string? Rol { get; set; } = "";
 
