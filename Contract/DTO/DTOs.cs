@@ -44,4 +44,21 @@
         public DateTime PaymentDate { get; set; }
         public EmployeeDTO? Employee { get; set; }
     }
+
+    public class LotDto
+    {
+        public int LotId { get; set; }
+        public DateTime DateReceipt { get; set; }
+        public DateTime Expiration { get; set; }
+        public int StatusId { get; set; }
+        public int Quantity { get; set; }
+    }
+
+    public class ProductWithLotsDto
+    {
+        public int ProductId { get; set; }
+        public string ProductName { get; set; } = null!;
+        public double UnitPrice { get; set; }
+        public List<LotDto> Lots { get; set; } = new();
+    }
 }

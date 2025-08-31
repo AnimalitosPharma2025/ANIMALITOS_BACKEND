@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ANIMALITOS_PHARMA_API.Contract.DTO;
+using Microsoft.EntityFrameworkCore;
 
 namespace ANIMALITOS_PHARMA_API.Accessors
 {
@@ -92,6 +93,33 @@ namespace ANIMALITOS_PHARMA_API.Accessors
             _EntityContext.SaveChanges();
 
             return ConvertLoad_ToAccessorContract(newObj);
+        }
+        public IEnumerable<dynamic> LoadDataforModal()
+        {
+            var productosConLotes = _EntityContext.InventoryItems
+                .Include(i => i.Product)
+                .Include(i => i.ProductLot)
+                .GroupBy(i => i.ProductId)
+                .Select(g => new
+                {
+                    ProductId = g.Key,
+                    ProductName = g.First().Product.Name,
+                    UnitPrice = g.First().Product.UnitPrice,
+                    Lots = g.GroupBy(i => i.ProductLotId)
+                            .Select(l => new
+                            {
+                                LotId = l.Key,
+                                DateReceipt = l.First().ProductLot.DateReceipt,
+                                Expiration = l.First().ProductLot.Expiration,
+                                StatusId = l.First().ProductLot.StatusId,
+                                Quantity = l.Count()
+                            })
+                            .ToList()
+                })
+                .ToList();
+
+
+            return productosConLotes;
         }
 
         public Load UpdateLoad(Load obj)

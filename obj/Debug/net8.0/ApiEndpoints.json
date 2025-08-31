@@ -642,6 +642,16 @@
   },
   {
     "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.LoadController",
+    "Method": "LoadDataforModal",
+    "RelativePath": "Load/LoadDataforModal",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.LoadController",
     "Method": "UpdateLoad",
     "RelativePath": "Load/UpdateLoad",
     "HttpMethod": "PUT",
