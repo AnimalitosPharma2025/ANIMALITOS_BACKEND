@@ -1,5 +1,8 @@
 ﻿using ANIMALITOS_PHARMA_API.Contract.DTO;
+using ANIMALITOS_PHARMA_API.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+using XAct;
 
 namespace ANIMALITOS_PHARMA_API.Accessors
 {
@@ -87,21 +90,30 @@ namespace ANIMALITOS_PHARMA_API.Accessors
 
         public dynamic CreateLoadAndContent(dynamic formData)
         {
-            //var productList = new List<dynamic>();
-            //foreach (var product in formData["contents"])
-            //{
-            //    int id = product.Id;
-            //    productList.Add(_EntityContext.Loads.SingleOrDefault(m => m.Id == id));
-            //}
-            //var newLoad = new Load
-            //{
-            //    CreatedDate = DateTime.Now,
-            //    EmployeeId = formData.EmployeeId,
+            var productList = new List<dynamic>();
+            var lotList = new List<dynamic>();
 
-            //};
+            foreach (var content in formData.GetProperty("contents").EnumerateArray())
+            {
+                int productId = content.GetProperty("productId").GetInt32();
+                int productLotId = content.GetProperty("lotNumber").GetInt32();
 
-            //_EntityContext.Loads.Add();
-            return formData;
+                var product = _EntityContext.Products.SingleOrDefault(m => m.Id == productId);
+                var productLot = _EntityContext.ProductLots.SingleOrDefault(m => m.Id == productLotId);
+
+                productList.Add(product!);
+                lotList.Add(productLot!);
+            }
+
+            double total = productList.EnumerateArray()
+                .Select(p =>
+                {
+                    double unitPrice = p.GetProperty("unitPrice").GetDouble();
+                    double discount = p.GetProperty("discount").GetDouble();
+                    return unitPrice * (1 - (discount / 100));
+                }).Sum();
+
+            return loadValue;
         }
 
         public Load CreateLoad(Load obj)
