@@ -84,6 +84,25 @@ namespace ANIMALITOS_PHARMA_API.Accessors
             return ConvertLoad_ToAccessorContract(objTemp);
         }
 
+        public dynamic CreateLoadAndContent(dynamic formData)
+        {
+            //var productList = new List<dynamic>();
+            //foreach (var product in formData["contents"])
+            //{
+            //    int id = product.Id;
+            //    productList.Add(_EntityContext.Loads.SingleOrDefault(m => m.Id == id));
+            //}
+            //var newLoad = new Load
+            //{
+            //    CreatedDate = DateTime.Now,
+            //    EmployeeId = formData.EmployeeId,
+
+            //};
+
+            //_EntityContext.Loads.Add();
+            return formData;
+        }
+
         public Load CreateLoad(Load obj)
         {
             var newObj = ConvertLoad_ToAccessorModel(obj);
