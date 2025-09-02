@@ -1,6 +1,8 @@
-﻿using ANIMALITOS_PHARMA_API.Contract.DTO;
+﻿using ANIMALITOS_PHARMA_API.Accessors.Util.StatusEnumerable;
+using ANIMALITOS_PHARMA_API.Contract.DTO;
 using ANIMALITOS_PHARMA_API.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.ObjectModel;
 using System.Reflection;
 using XAct;
 
@@ -90,8 +92,8 @@ namespace ANIMALITOS_PHARMA_API.Accessors
 
         public dynamic CreateLoadAndContent(dynamic formData)
         {
-            var productList = new List<dynamic>();
-            var lotList = new List<dynamic>();
+            var productList = new List<Product>();
+            var productLotList = new List<ProductLot>();
 
             foreach (var content in formData.GetProperty("contents").EnumerateArray())
             {
@@ -101,19 +103,66 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 var product = _EntityContext.Products.SingleOrDefault(m => m.Id == productId);
                 var productLot = _EntityContext.ProductLots.SingleOrDefault(m => m.Id == productLotId);
 
-                productList.Add(product!);
-                lotList.Add(productLot!);
+                if (product == null || productLot == null)
+                    return $"Invalid product or lot (ProductId: {productId}, LotId: {productLotId})";
+
+                productList.Add(ConvertProduct_ToAccessorContract(product));
+                productLotList.Add(ConvertProductLot_ToAccessorContract(productLot));
             }
 
-            double total = productList.EnumerateArray()
-                .Select(p =>
-                {
-                    double unitPrice = p.GetProperty("unitPrice").GetDouble();
-                    double discount = p.GetProperty("discount").GetDouble();
-                    return unitPrice * (1 - (discount / 100));
-                }).Sum();
+            var newLoadObject = new Models.Load
+            {
+                CreatedDate = DateTime.Now,
+                EmployeeId = formData.GetProperty("employeeId").GetInt32(),
+                StatusId = (int)ObjectStatus.ACTIVE
+            };
 
-            return loadValue;
+            _EntityContext.Loads.Add(newLoadObject);
+            _EntityContext.SaveChanges();
+
+            int index = 0;
+            foreach (var lot in productLotList)
+            {
+                int requiredQty = formData.GetProperty("contents")[index].GetProperty("quantity").GetInt32();
+
+                var availableItems = _EntityContext.InventoryItems
+                    .Where(m => m.ProductLotId == lot.Id
+                                && !_EntityContext.LoadsContents.Any(lc => lc.InventoryId == m.Id))
+                    .OrderBy(m => m.Id)
+                    .Take(requiredQty)
+                    .ToList();
+
+                if (availableItems.Count < requiredQty)
+                {
+                    return $"Not enough free items in lot {lot.Id}. Needed {requiredQty}, found {availableItems.Count}";
+                }
+
+                foreach (var item in availableItems)
+                {
+                    var loadContent = new LoadsContent
+                    {
+                        LoadId = newLoadObject.Id,
+                        InventoryId = item.Id,
+                        StatusId = (int)ObjectStatus.ACTIVE
+                    };
+
+                    _EntityContext.LoadsContents.Add(loadContent);
+                }
+
+                index++;
+            }
+
+            _EntityContext.SaveChanges();
+
+            return new
+            {
+                newLoadObject.Id,
+                newLoadObject.CreatedDate,
+                newLoadObject.EmployeeId,
+                newLoadObject.StatusId,
+                Products = productList,
+                Lots = productLotList
+            };
         }
 
         public Load CreateLoad(Load obj)
