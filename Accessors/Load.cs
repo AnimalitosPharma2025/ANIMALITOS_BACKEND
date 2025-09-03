@@ -117,13 +117,31 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 StatusId = (int)ObjectStatus.ACTIVE
             };
 
+            decimal totalValue = 0;
+
+            int index = 0;
+            foreach (var content in formData.GetProperty("contents").EnumerateArray())
+            {
+                int productId = content.GetProperty("productId").GetInt32();
+                int qty = content.GetProperty("quantity").GetInt32();
+
+                var product = _EntityContext.Products.SingleOrDefault(m => m.Id == productId);
+                if (product != null)
+                {
+                    totalValue += (decimal)product.UnitPrice * qty;
+                }
+                index++;
+            }
+
+            newLoadObject.LoadValue = (double?)totalValue;
+
             _EntityContext.Loads.Add(newLoadObject);
             _EntityContext.SaveChanges();
 
-            int index = 0;
+            int indexProductLot = 0;
             foreach (var lot in productLotList)
             {
-                int requiredQty = formData.GetProperty("contents")[index].GetProperty("quantity").GetInt32();
+                int requiredQty = formData.GetProperty("contents")[indexProductLot].GetProperty("quantity").GetInt32();
 
                 var availableItems = _EntityContext.InventoryItems
                     .Where(m => m.ProductLotId == lot.Id
@@ -149,7 +167,7 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                     _EntityContext.LoadsContents.Add(loadContent);
                 }
 
-                index++;
+                indexProductLot++;
             }
 
             _EntityContext.SaveChanges();
