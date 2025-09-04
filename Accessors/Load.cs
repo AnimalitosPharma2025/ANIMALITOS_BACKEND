@@ -59,6 +59,7 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                     l.EmployeeId,
                     l.CreatedDate,
                     EmployeeName = l.Employee != null ? l.Employee.Name : "Sin asignar",
+                    EmployeeLastName = l.Employee != null ? l.Employee.LastName : "",
                     StatusId = l.Status != null ? l.Status.Id : 0,
                     Contents = l.LoadsContents.Select(lc => new
                     {
@@ -93,9 +94,6 @@ namespace ANIMALITOS_PHARMA_API.Accessors
         public dynamic CreateLoadAndContent(dynamic formData)
         {
             using var transaction = _EntityContext.Database.BeginTransaction();
-
-            try
-            {
                 var productList = new List<Product>();
                 var productLotList = new List<ProductLot>();
 
@@ -146,8 +144,7 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                     int requiredQty = formData.GetProperty("contents")[indexProductLot].GetProperty("quantity").GetInt32();
 
                     var availableItems = _EntityContext.InventoryItems
-                        .Where(m => m.ProductLotId == lot.Id
-                                    && !_EntityContext.LoadsContents.Any(lc => lc.InventoryId == m.Id))
+                        .Where(m => m.ProductLotId == lot.Id && !_EntityContext.LoadsContents.Any(lc => lc.InventoryId == m.Id))
                         .OrderBy(m => m.Id)
                         .Take(requiredQty)
                         .ToList();
@@ -183,12 +180,6 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                     Lots = productLotList
                 };
             }
-            catch (Exception ex)
-            {
-                transaction.Rollback();
-                return new { Error = ex.Message };
-            }
-        }
 
 
         public Load CreateLoad(Load obj)
@@ -200,6 +191,7 @@ namespace ANIMALITOS_PHARMA_API.Accessors
 
             return ConvertLoad_ToAccessorContract(newObj);
         }
+
         public IEnumerable<dynamic> LoadDataforModal()
         {
             var productosConLotes = _EntityContext.InventoryItems
