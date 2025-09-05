@@ -683,6 +683,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.LoadController",
+    "Method": "UpdateLoadAndContent",
+    "RelativePath": "Load/UpdateLoadAndContent",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "load",
+        "Type": "System.Object",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.LoadsContentController",
     "Method": "CreateLoadContent",
     "RelativePath": "LoadContent/CreateLoadContent",

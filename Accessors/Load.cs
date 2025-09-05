@@ -181,6 +181,86 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 };
             }
 
+        public dynamic UpdateLoadAndContent(dynamic formData)
+        {
+            using var transaction = _EntityContext.Database.BeginTransaction();
+
+            int loadId = formData.GetProperty("loadId").GetInt32();
+            var existingLoad = _EntityContext.Loads
+                .SingleOrDefault(l => l.Id == loadId);
+
+            if (existingLoad == null)
+                throw new Exception($"Load {loadId} not found");
+
+            existingLoad.EmployeeId = formData.GetProperty("employeeId").GetInt32();
+
+            var productList = new List<Product>();
+            var productLotList = new List<ProductLot>();
+            var oldContents = _EntityContext.LoadsContents
+                .Where(lc => lc.LoadId == loadId)
+                .ToList();
+
+            _EntityContext.LoadsContents.RemoveRange(oldContents);
+            _EntityContext.SaveChanges();
+
+            decimal totalValue = 0;
+            int index = 0;
+
+            foreach (var content in formData.GetProperty("contents").EnumerateArray())
+            {
+                int productId = content.GetProperty("productId").GetInt32();
+                int productLotId = content.GetProperty("lotNumber").GetInt32();
+                int qty = content.GetProperty("quantity").GetInt32();
+
+                var product = _EntityContext.Products.SingleOrDefault(m => m.Id == productId);
+                var productLot = _EntityContext.ProductLots.SingleOrDefault(m => m.Id == productLotId);
+
+                if (product == null || productLot == null)
+                    throw new Exception($"Invalid product or lot (ProductId: {productId}, LotId: {productLotId})");
+
+                productList.Add(ConvertProduct_ToAccessorContract(product));
+                productLotList.Add(ConvertProductLot_ToAccessorContract(productLot));
+                totalValue += (decimal)product.UnitPrice * qty;
+
+                var availableItems = _EntityContext.InventoryItems
+                    .Where(m => m.ProductLotId == productLotId &&
+                                !_EntityContext.LoadsContents.Any(lc => lc.InventoryId == m.Id))
+                    .OrderBy(m => m.Id)
+                    .Take(qty)
+                    .ToList();
+
+                if (availableItems.Count < qty)
+                    throw new Exception($"Not enough free items in lot {productLotId}. Needed {qty}, found {availableItems.Count}");
+
+                foreach (var item in availableItems)
+                {
+                    var loadContent = new LoadsContent
+                    {
+                        LoadId = existingLoad.Id,
+                        InventoryId = item.Id,
+                        StatusId = (int)ObjectStatus.ACTIVE
+                    };
+                    _EntityContext.LoadsContents.Add(loadContent);
+                }
+
+                index++;
+            }
+
+            existingLoad.LoadValue = (double?)totalValue;
+            _EntityContext.SaveChanges();
+
+            transaction.Commit();
+
+            return new
+            {
+                existingLoad.Id,
+                existingLoad.CreatedDate,
+                existingLoad.EmployeeId,
+                existingLoad.StatusId,
+                Products = productList,
+                Lots = productLotList
+            };
+        }
 
         public Load CreateLoad(Load obj)
         {

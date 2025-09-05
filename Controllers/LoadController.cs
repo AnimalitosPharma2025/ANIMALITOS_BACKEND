@@ -91,6 +91,22 @@ namespace ANIMALITOS_PHARMA_API.Controllers
         }
 
         [HttpPost]
+        [Route("/Load/UpdateLoadAndContent")]
+        public IActionResult UpdateLoadAndContent(dynamic load)
+        {
+            try
+            {
+                accessor.Login((string)ApiHelpers.AuthorizationUser(Request));
+                var obj = accessor.UpdateLoadAndContent(load);
+                return ApiHelpers.CreateSuccessResult(obj, nameof(UpdateLoadAndContent));
+            }
+            catch (Exception ex)
+            {
+                return ApiHelpers.CreateBadResult(ex);
+            }
+        }
+
+        [HttpPost]
         [Route("/Load/CreateLoad")]
         public IActionResult CreateLoad(Load load)
         {
