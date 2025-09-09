@@ -153,6 +153,7 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 Category = tempitem.Category,
                 PurchasePrice = tempitem.PurchasePrice,
                 UnitPrice = tempitem.UnitPrice,
+                Discount = tempitem.Discount,
                 Code = tempitem.Code,
                 VendorId = tempitem.VendorId,
                 StatusId = tempitem.StatusId
