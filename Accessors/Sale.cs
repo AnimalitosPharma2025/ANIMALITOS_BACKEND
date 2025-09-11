@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace ANIMALITOS_PHARMA_API.Accessors
 {
@@ -17,8 +17,6 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 query = query.Where(m => m.ClientId == filter.ClientId);
             if (filter.EmployeeId > 0)
                 query = query.Where(m => m.EmployeeId == filter.EmployeeId);
-            if (filter.InventoryId > 0)
-                query = query.Where(m => m.InventoryId == filter.InventoryId);
             if (filter.StatusId != 0)
                 query = query.Where(m => m.StatusId == filter.StatusId);
 
@@ -50,6 +48,42 @@ namespace ANIMALITOS_PHARMA_API.Accessors
             return ConvertSale_ToAccessorContract(objTemp);
         }
 
+        public IEnumerable<dynamic> LoadSalesTable()
+        {
+            var sales = _EntityContext.Sales
+                .Include(s => s.Client)
+                .Include(s => s.Employee)
+                .Include(s => s.SaleItems)
+                    .ThenInclude(i => i.Inventory)
+                        .ThenInclude(inv => inv.Product)
+                .Include(s => s.SaleItems)
+                    .ThenInclude(i => i.Inventory)
+                        .ThenInclude(inv => inv.ProductLot)
+                .Select(s => new
+                {
+                    Id = s.Id,
+                    Date = s.PurchaseDate,
+                    Client = new { s.Client.Id, s.Client.Name },
+                    Employee = new { s.Employee.Id, s.Employee.Name, s.Employee.LastName },
+                    Items = s.SaleItems
+                        .GroupBy(i => new { i.Inventory.Product.Id, i.Inventory.Product.Name, i.Inventory.ProductLotId })
+                        .Select(g => new
+                        {
+                            Product = new { g.Key.Id, g.Key.Name },
+                            ProductLotId = g.Key.ProductLotId,
+                            Quantity = g.Count(), // 🔹 cantidad calculada
+                            UnitPrice = g.First().UnitPrice,
+                            Discount = g.Sum(x => x.Discount ?? 0),
+                            Subtotal = g.Sum(x => (x.UnitPrice ?? 0) - (x.Discount ?? 0))
+                        }).ToList(),
+                    Total = s.SaleItems.Sum(i => (i.UnitPrice ?? 0) - (i.Discount ?? 0))
+                })
+                .ToList();
+
+            return sales;
+        }
+
+
         public Sale CreateSale(Sale obj)
         {
             var newObj = ConvertSale_ToAccessorModel(obj);
@@ -70,9 +104,8 @@ namespace ANIMALITOS_PHARMA_API.Accessors
 
             objTemp.Id = obj.Id;
             objTemp.PurchaseDate = obj.PurchaseDate;
-            objTemp.ClientId = obj.ClientId;
+            objTemp.ClientId = (int)obj.ClientId;
             objTemp.EmployeeId = obj.EmployeeId;
-            objTemp.InventoryId = obj.InventoryId;
             objTemp.StatusId = obj.StatusId;
 
             _EntityContext.Sales.Update(objTemp);
@@ -104,7 +137,6 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 PurchaseDate = tempitem.PurchaseDate,
                 ClientId = tempitem.ClientId,
                 EmployeeId = tempitem.EmployeeId,
-                InventoryId = tempitem.InventoryId,
                 StatusId = tempitem.StatusId
             };
 
@@ -117,9 +149,8 @@ namespace ANIMALITOS_PHARMA_API.Accessors
             {
                 Id = tempItem.Id,
                 PurchaseDate = tempItem.PurchaseDate,
-                ClientId = tempItem.ClientId,
+                ClientId = (int)tempItem.ClientId,
                 EmployeeId = tempItem.EmployeeId,
-                InventoryId = tempItem.InventoryId,
                 StatusId = tempItem.StatusId
             };
 

@@ -9,13 +9,15 @@ public partial class Sale
 
     public DateTime PurchaseDate { get; set; }
 
-    public int? ClientId { get; set; }
+    public int ClientId { get; set; }
 
     public int EmployeeId { get; set; }
 
-    public int InventoryId { get; set; }
-
     public int StatusId { get; set; }
+
+    public decimal? Total { get; set; }
+
+    public virtual ICollection<SaleItem> SaleItems { get; set; } = new List<SaleItem>();
 
     public virtual Client? Client { get; set; }
 

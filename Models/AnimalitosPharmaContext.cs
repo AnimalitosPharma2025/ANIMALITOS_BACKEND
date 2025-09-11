@@ -49,6 +49,8 @@ public partial class AnimalitosPharmaContext : DbContext
 
     public virtual DbSet<Sale> Sales { get; set; }
 
+    public virtual DbSet<SaleItem> SaleItems { get; set; }
+
     public virtual DbSet<Status> Statuses { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
@@ -134,7 +136,9 @@ public partial class AnimalitosPharmaContext : DbContext
             entity.Property(e => e.ExpirationDate)
                 .HasColumnType("datetime")
                 .HasColumnName("EXPIRATION_DATE");
-            entity.Property(e => e.IsSale).HasColumnName("IS_SALE");
+            entity.Property(e => e.IsSale)
+                .HasDefaultValue(false)
+                .HasColumnName("IS_SALE");
             entity.Property(e => e.PurchaseDate)
                 .HasColumnType("datetime")
                 .HasColumnName("PURCHASE_DATE");
@@ -364,7 +368,9 @@ public partial class AnimalitosPharmaContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("DESCRIPTION");
-            entity.Property(e => e.Discount).HasColumnName("DISCOUNT");
+            entity.Property(e => e.Discount)
+                .HasDefaultValue(0.0)
+                .HasColumnName("DISCOUNT");
             entity.Property(e => e.ImageUrl)
                 .IsUnicode(false)
                 .HasColumnName("IMAGE_URL");
@@ -461,37 +467,48 @@ public partial class AnimalitosPharmaContext : DbContext
 
         modelBuilder.Entity<Sale>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__SALES__3214EC2765ABA51A");
+            entity.HasKey(e => e.Id).HasName("PK__SALES__3214EC2727041B3A");
 
             entity.ToTable("SALES");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.ClientId).HasColumnName("CLIENT_ID");
             entity.Property(e => e.EmployeeId).HasColumnName("EMPLOYEE_ID");
-            entity.Property(e => e.InventoryId).HasColumnName("INVENTORY_ID");
             entity.Property(e => e.PurchaseDate)
                 .HasColumnType("datetime")
                 .HasColumnName("PURCHASE_DATE");
             entity.Property(e => e.StatusId).HasColumnName("STATUS_ID");
+            entity.Property(e => e.Total)
+                .HasColumnType("decimal(18, 2)")
+                .HasColumnName("TOTAL");
+        });
 
-            entity.HasOne(d => d.Client).WithMany(p => p.Sales)
-                .HasForeignKey(d => d.ClientId)
-                .HasConstraintName("FK_SALES_CLIENTS");
+        modelBuilder.Entity<SaleItem>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__SALE_ITE__3214EC27A9BB0A0B");
 
-            entity.HasOne(d => d.Employee).WithMany(p => p.Sales)
-                .HasForeignKey(d => d.EmployeeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_SALES_EMPLOYEES");
+            entity.ToTable("SALE_ITEMS");
 
-            entity.HasOne(d => d.Inventory).WithMany(p => p.Sales)
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Discount)
+                .HasDefaultValue(0m)
+                .HasColumnType("decimal(18, 2)")
+                .HasColumnName("DISCOUNT");
+            entity.Property(e => e.InventoryId).HasColumnName("INVENTORY_ID");
+            entity.Property(e => e.SaleId).HasColumnName("SALE_ID");
+            entity.Property(e => e.UnitPrice)
+                .HasColumnType("decimal(18, 2)")
+                .HasColumnName("UNIT_PRICE");
+
+            entity.HasOne(d => d.Inventory).WithMany(p => p.SaleItems)
                 .HasForeignKey(d => d.InventoryId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_SALES_INVENTORY");
+                .HasConstraintName("FK__SALE_ITEM__INVEN__3493CFA7");
 
-            entity.HasOne(d => d.Status).WithMany(p => p.Sales)
-                .HasForeignKey(d => d.StatusId)
+            entity.HasOne(d => d.Sale).WithMany(p => p.SaleItems)
+                .HasForeignKey(d => d.SaleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_SALES_STATUS");
+                .HasConstraintName("FK__SALE_ITEM__SALE___339FAB6E");
         });
 
         modelBuilder.Entity<Status>(entity =>

@@ -21,7 +21,7 @@ public partial class Product
 
     public int StatusId { get; set; }
 
-    public string Code { get; set; }
+    public string? Code { get; set; }
 
     public string? ImageUrl { get; set; }
 

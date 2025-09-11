@@ -19,7 +19,5 @@ public partial class Client
 
     public virtual ICollection<Credit> Credits { get; set; } = new List<Credit>();
 
-    public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
-
     public virtual Status Status { get; set; } = null!;
 }

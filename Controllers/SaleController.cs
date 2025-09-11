@@ -42,6 +42,22 @@ namespace ANIMALITOS_PHARMA_API.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("/Sale/LoadSalesTable")]
+        public IActionResult LoadSalesTable(int id)
+        {
+            try
+            {
+                accessor.Login((string)ApiHelpers.AuthorizationUser(Request));
+                var obj = accessor.LoadSalesTable();
+                return ApiHelpers.CreateSuccessResult(obj, nameof(LoadSalesTable));
+            }
+            catch (Exception ex)
+            {
+                return ApiHelpers.CreateBadResult(ex);
+            }
+        }
+
         [HttpPost]
         [Route("/Sale/CreateSale")]
         public IActionResult CreateSale(Sale sale)

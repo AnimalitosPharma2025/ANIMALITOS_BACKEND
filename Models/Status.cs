@@ -41,8 +41,6 @@ public partial class Status
 
     public virtual ICollection<Rol> Rols { get; set; } = new List<Rol>();
 
-    public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
-
     public virtual ICollection<UserPermission> UserPermissions { get; set; } = new List<UserPermission>();
 
     public virtual ICollection<User> Users { get; set; } = new List<User>();

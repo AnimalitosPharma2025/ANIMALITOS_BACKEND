@@ -19,7 +19,7 @@ public partial class InventoryItem
 
     public virtual ICollection<LoadsContent> LoadsContents { get; set; } = new List<LoadsContent>();
 
-    public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
+    public virtual ICollection<SaleItem> SaleItems { get; set; } = new List<SaleItem>();
 
     public virtual Status Status { get; set; } = null!;
 
