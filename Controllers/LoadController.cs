@@ -74,6 +74,22 @@ namespace ANIMALITOS_PHARMA_API.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("/Load/GetLoadForEmployee/{id}")]
+        public IActionResult GetLoadForEmployee(int id)
+        {
+            try
+            {
+                accessor.Login((string)ApiHelpers.AuthorizationUser(Request));
+                var obj = accessor.GetLoadForEmployee(id);
+                return ApiHelpers.CreateSuccessResult(obj, nameof(GetLoadForEmployee));
+            }
+            catch (Exception ex)
+            {
+                return ApiHelpers.CreateBadResult(ex);
+            }
+        }
+
         [HttpPost]
         [Route("/Load/CreateLoadAndContent")]
         public IActionResult CreateLoadAndContent(dynamic load)

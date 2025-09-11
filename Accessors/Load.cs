@@ -79,6 +79,41 @@ namespace ANIMALITOS_PHARMA_API.Accessors
             return loads;
         }
 
+        public dynamic GetLoadForEmployee(int employeeId)
+        {
+            var loads = _EntityContext.Loads
+                .Where(l => l.EmployeeId == employeeId) // <-- filtro por empleado
+                .Include(l => l.Employee)
+                .Include(l => l.Status)
+                .Include(l => l.LoadsContents)
+                    .ThenInclude(lc => lc.Inventory)
+                        .ThenInclude(inv => inv.Product)
+                .Include(l => l.LoadsContents)
+                    .ThenInclude(lc => lc.Inventory)
+                        .ThenInclude(inv => inv.ProductLot)
+                .Select(l => new
+                {
+                    LoadId = l.Id,
+                    l.CreatedDate,
+                    StatusId = l.Status != null ? l.Status.Id : 0,
+                    Contents = l.LoadsContents.Select(lc => new
+                    {
+                        ProductName = lc.Inventory!.Product.Name,
+                        LotNumber = lc.Inventory.ProductLot.Id,
+                        ExpirationDate = lc.Inventory.ProductLot.Expiration,
+                        UnitPrice = lc.Inventory.Product.UnitPrice,
+                        Discount = lc.Inventory.Product.Discount ?? 0
+                    }),
+                    l.LoadValue,
+                    LoadWithDiscount = l.LoadsContents.Sum(lc =>
+                        lc.Inventory!.Product.UnitPrice - (lc.Inventory.Product.UnitPrice * (lc.Inventory.Product.Discount ?? 0))),
+                    Quantity = l.LoadsContents.Count()
+                })
+                .ToList();
+
+                    return loads;
+        }
+
         public Load GetLoad(int id)
         {
             if (id <= 0)

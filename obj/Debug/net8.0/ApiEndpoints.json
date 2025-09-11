@@ -658,6 +658,22 @@
   },
   {
     "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.LoadController",
+    "Method": "GetLoadForEmployee",
+    "RelativePath": "Load/GetLoadForEmployee/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.LoadController",
     "Method": "LoadDataforModal",
     "RelativePath": "Load/LoadDataforModal",
     "HttpMethod": "GET",
@@ -1426,6 +1442,22 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.SaleController",
+    "Method": "LoadSalesTable",
+    "RelativePath": "Sale/LoadSalesTable",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
