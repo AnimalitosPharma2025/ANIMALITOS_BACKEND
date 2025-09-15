@@ -1,4 +1,5 @@
-﻿using ANIMALITOS_PHARMA_API.Contracts;
+﻿using ANIMALITOS_PHARMA_API.Contract.DTO;
+using ANIMALITOS_PHARMA_API.Contracts;
 using Microsoft.EntityFrameworkCore;
 
 namespace ANIMALITOS_PHARMA_API.Accessors
@@ -45,6 +46,23 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 throw new Exception($"Object with Id of {id} does exist.");
 
             return ConvertNotification_ToAccessorContract(objTemp);
+        }
+
+        public IEnumerable<UserNotificationDto> GetUserNotifications(int userId)
+        {
+            var query = from nu in _EntityContext.NotificationsUsers
+                        join n in _EntityContext.Notifications
+                            on nu.Id equals n.Id
+                        where nu.UserId == userId
+                        select new UserNotificationDto
+                        {
+                            Id = n.Id,
+                            Title = n.Title ?? "Notificación",
+                            Message = n.Message ?? "",
+                            IsRead = nu.IsRead ?? false
+                        };
+
+            return query.ToList();
         }
 
         public Notification CreateNotification(Notification obj)

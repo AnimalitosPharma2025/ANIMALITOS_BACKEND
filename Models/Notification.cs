@@ -13,5 +13,7 @@ public partial class Notification
 
     public int? StatusId { get; set; }
 
+    public virtual ICollection<NotificationsUser> NotificationsUsers { get; set; } = new List<NotificationsUser>();
+
     public virtual Status? Status { get; set; }
 }

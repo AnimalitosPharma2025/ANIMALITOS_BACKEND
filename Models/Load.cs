@@ -17,7 +17,7 @@ public partial class Load
 
     public virtual Employee? Employee { get; set; }
 
-    public virtual ICollection<LoadsContent> LoadsContents { get; set; } = new List<LoadsContent>(); 
+    public virtual ICollection<LoadsContent> LoadsContents { get; set; } = new List<LoadsContent>();
 
     public virtual Status? Status { get; set; }
 }

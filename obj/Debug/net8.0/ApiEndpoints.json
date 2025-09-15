@@ -870,6 +870,22 @@
   },
   {
     "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.Notifications",
+    "Method": "GetUserNotifications",
+    "RelativePath": "Notifications/GetUserNotifications/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.Notifications",
     "Method": "UpdateNotification",
     "RelativePath": "Notifications/UpdateNotification",
     "HttpMethod": "PUT",

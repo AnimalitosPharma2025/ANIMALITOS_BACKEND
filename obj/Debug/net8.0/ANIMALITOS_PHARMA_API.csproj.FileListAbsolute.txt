@@ -298,7 +298,6 @@ C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\obj\Debug\net8.0\staticwebassets.
 C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\obj\Debug\net8.0\ANIMALIT.168B9E60.Up2Date
 C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\obj\Debug\net8.0\ANIMALITOS_PHARMA_API.dll
 C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\obj\Debug\net8.0\refint\ANIMALITOS_PHARMA_API.dll

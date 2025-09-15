@@ -314,8 +314,14 @@ public partial class AnimalitosPharmaContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.IsRead).HasColumnName("IS_READ");
+            entity.Property(e => e.NotificationId).HasColumnName("NOTIFICATION_ID");
             entity.Property(e => e.StatusId).HasColumnName("STATUS_ID");
             entity.Property(e => e.UserId).HasColumnName("USER_ID");
+
+            entity.HasOne(d => d.Notification).WithMany(p => p.NotificationsUsers)
+                .HasForeignKey(d => d.NotificationId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_NOTIFICATIONS_USER_NOTIFICATIONS");
 
             entity.HasOne(d => d.Status).WithMany(p => p.NotificationsUsers)
                 .HasForeignKey(d => d.StatusId)

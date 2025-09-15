@@ -43,6 +43,22 @@ namespace ANIMALITOS_PHARMA_API.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("/Notifications/GetUserNotifications/{userId}")]
+        public IActionResult GetUserNotifications(int userId)
+        {
+            try
+            {
+                accessor.Login((string)ApiHelpers.AuthorizationUser(Request));
+                var obj = accessor.GetUserNotifications(userId);
+                return ApiHelpers.CreateSuccessResult(obj, nameof(GetUserNotifications));
+            }
+            catch (Exception ex)
+            {
+                return ApiHelpers.CreateBadResult(ex);
+            }
+        }
+
         [HttpPost]
         [Route("/Notifications/CreateNotification")]
         public IActionResult CreateNotification(Notification notification)

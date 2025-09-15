@@ -13,6 +13,10 @@ public partial class NotificationsUser
 
     public int? StatusId { get; set; }
 
+    public int NotificationId { get; set; }
+
+    public virtual Notification Notification { get; set; } = null!;
+
     public virtual Status? Status { get; set; }
 
     public virtual User? User { get; set; }
