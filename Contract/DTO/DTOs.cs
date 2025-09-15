@@ -65,8 +65,10 @@
     public class UserNotificationDto
     {
         public int Id { get; set; }
-        public string? Title { get; set; }
-        public string? Message { get; set; }
+        public int NotificationId { get; set; }
+        public string Title { get; set; } = string.Empty;
+        public string Message { get; set; } = string.Empty;
         public bool IsRead { get; set; }
+        public int? StatusId { get; set; }
     }
 }

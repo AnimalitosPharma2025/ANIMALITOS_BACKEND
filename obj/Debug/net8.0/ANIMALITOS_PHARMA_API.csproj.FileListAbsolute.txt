@@ -304,3 +304,4 @@ C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\obj\Debug\net8.0\refint\ANIMALITO
 C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\obj\Debug\net8.0\ANIMALITOS_PHARMA_API.pdb
 C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\obj\Debug\net8.0\ANIMALITOS_PHARMA_API.genruntimeconfig.cache
 C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\obj\Debug\net8.0\ref\ANIMALITOS_PHARMA_API.dll
+C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

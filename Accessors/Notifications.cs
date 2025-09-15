@@ -51,19 +51,21 @@ namespace ANIMALITOS_PHARMA_API.Accessors
         public IEnumerable<UserNotificationDto> GetUserNotifications(int userId)
         {
             var query = from nu in _EntityContext.NotificationsUsers
-                        join n in _EntityContext.Notifications
-                            on nu.Id equals n.Id
                         where nu.UserId == userId
+                        orderby nu.Id descending
                         select new UserNotificationDto
                         {
-                            Id = n.Id,
-                            Title = n.Title ?? "Notificación",
-                            Message = n.Message ?? "",
-                            IsRead = nu.IsRead ?? false
+                            Id = nu.Id,
+                            NotificationId = nu.NotificationId,
+                            Title = nu.Notification.Title ?? string.Empty,
+                            Message = nu.Notification.Message ?? string.Empty,
+                            IsRead = nu.IsRead ?? false,
+                            StatusId = nu.StatusId
                         };
 
             return query.ToList();
         }
+
 
         public Notification CreateNotification(Notification obj)
         {
