@@ -42,7 +42,8 @@ namespace ANIMALITOS_PHARMA_API.Controllers.Authorization
 
                 dynamic objectReturn = new
                 {
-                    Username = userTemp.Username,
+                    UserId = userTemp.Id,
+                    userTemp.Username,
                     Permissions = CheckUserPermissions(userTemp.Id),
                     Token = token
                 };
