@@ -76,7 +76,7 @@ namespace ANIMALITOS_PHARMA_API.Accessors
             return ConvertNotificationsUser_ToAccessorContract(objTemp);
         }
 
-        public NotificationsUser DeleteNotification(NotificationsUser obj, bool hardDelete)
+        public NotificationsUser DeleteNotificationUser(NotificationsUser obj, bool hardDelete)
         {
             if (obj.Id <= 0)
                 throw new Exception("Cannot delete object without an Id.");
