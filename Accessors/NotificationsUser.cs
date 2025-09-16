@@ -67,8 +67,8 @@ namespace ANIMALITOS_PHARMA_API.Accessors
 
             objTemp.Id = obj.Id;
             objTemp.IsRead = obj.IsRead ?? objTemp.IsRead;
-            objTemp.UserId = obj.UserId ?? objTemp.UserId;
-            objTemp.StatusId = obj.StatusId ?? objTemp.StatusId;
+            objTemp.UserId = obj.UserId > 0 ? obj.UserId : objTemp.UserId;
+            objTemp.StatusId = obj.StatusId ?? 1;
 
             _EntityContext.NotificationsUsers.Update(objTemp);
             _EntityContext.SaveChanges();

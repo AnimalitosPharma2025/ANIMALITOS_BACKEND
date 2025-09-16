@@ -901,6 +901,91 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.NotificationsUser",
+    "Method": "CreateNotificationUser",
+    "RelativePath": "NotificationsUser/CreateNotificationUser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "notification",
+        "Type": "ANIMALITOS_PHARMA_API.Contracts.NotificationsUser",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.NotificationsUser",
+    "Method": "DeleteNotificationUser",
+    "RelativePath": "NotificationsUser/DeleteNotificationUser/{hardDelete}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "notification",
+        "Type": "ANIMALITOS_PHARMA_API.Contracts.NotificationsUser",
+        "IsRequired": true
+      },
+      {
+        "Name": "hardDelete",
+        "Type": "System.Boolean",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.NotificationsUser",
+    "Method": "GetListNotificationsUser",
+    "RelativePath": "NotificationsUser/GetListNotificationsUser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "filter",
+        "Type": "ANIMALITOS_PHARMA_API.Contracts.NotificationsUserFilter",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.NotificationsUser",
+    "Method": "GetNotificationUser",
+    "RelativePath": "NotificationsUser/GetNotificationUser/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.NotificationsUser",
+    "Method": "UpdateNotificationUser",
+    "RelativePath": "NotificationsUser/UpdateNotificationUser",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "notification",
+        "Type": "ANIMALITOS_PHARMA_API.Contracts.NotificationsUser",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.PermissionController",
     "Method": "CreatePermission",
     "RelativePath": "Permission/CreatePermission",
