@@ -66,9 +66,9 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 throw new Exception($"Object with Id of {obj.Id} does not exist.");
 
             objTemp.Id = obj.Id;
-            objTemp.IsRead = obj.IsRead;
-            objTemp.UserId = obj.UserId;
-            objTemp.StatusId = obj.StatusId;
+            objTemp.IsRead = obj.IsRead ?? objTemp.IsRead;
+            objTemp.UserId = obj.UserId ?? objTemp.UserId;
+            objTemp.StatusId = obj.StatusId ?? objTemp.StatusId;
 
             _EntityContext.NotificationsUsers.Update(objTemp);
             _EntityContext.SaveChanges();
