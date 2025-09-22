@@ -79,10 +79,11 @@ namespace ANIMALITOS_PHARMA_API.Accessors
             return loads;
         }
 
-        public dynamic GetLoadForEmployee(int employeeId)
+        public dynamic GetLoadForEmployee(int userId)
         {
+            var employeeId = _EntityContext.Users.Where(u => u.Id == userId).Select(u => u.EmployeeId).FirstOrDefault();
             var loads = _EntityContext.Loads
-                .Where(l => l.EmployeeId == employeeId) // <-- filtro por empleado
+                .Where(l => l.EmployeeId == employeeId)
                 .Include(l => l.Employee)
                 .Include(l => l.Status)
                 .Include(l => l.LoadsContents)

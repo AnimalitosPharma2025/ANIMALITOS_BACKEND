@@ -7850,23 +7850,26 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\samar\\.nuget\\packages\\": {},
+    "C:\\Users\\Aloga\\.nuget\\packages\\": {},
+    "C:\\Program Files\\DevExpress 25.1\\Components\\Offline Packages": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\samar\\source\\repos\\ANIMALITOS_BACKEND\\ANIMALITOS_PHARMA_API.csproj",
+      "projectUniqueName": "C:\\Users\\Aloga\\source\\repos\\ANIMALITOS_BACKEND\\ANIMALITOS_PHARMA_API.csproj",
       "projectName": "ANIMALITOS_PHARMA_API",
-      "projectPath": "C:\\Users\\samar\\source\\repos\\ANIMALITOS_BACKEND\\ANIMALITOS_PHARMA_API.csproj",
-      "packagesPath": "C:\\Users\\samar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\samar\\source\\repos\\ANIMALITOS_BACKEND\\obj\\",
+      "projectPath": "C:\\Users\\Aloga\\source\\repos\\ANIMALITOS_BACKEND\\ANIMALITOS_PHARMA_API.csproj",
+      "packagesPath": "C:\\Users\\Aloga\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Aloga\\source\\repos\\ANIMALITOS_BACKEND\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Program Files\\DevExpress 25.1\\Components\\Offline Packages",
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\samar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Aloga\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 25.1.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -7875,6 +7878,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\DevExpress 25.1\\Components\\System\\Components\\Packages": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -7893,7 +7897,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -7953,7 +7957,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
   },
@@ -7962,7 +7966,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "El paquete \"CommonServiceLocator 1.3.0\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1\" en lugar de la plataforma de destino del proyecto \"net8.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
+      "message": "Package 'CommonServiceLocator 1.3.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
       "libraryId": "CommonServiceLocator",
       "targetGraphs": [
         "net8.0"
@@ -7972,7 +7976,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "El paquete \"XAct.Core.PCL 0.0.5014\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1\" en lugar de la plataforma de destino del proyecto \"net8.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
+      "message": "Package 'XAct.Core.PCL 0.0.5014' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
       "libraryId": "XAct.Core.PCL",
       "targetGraphs": [
         "net8.0"
