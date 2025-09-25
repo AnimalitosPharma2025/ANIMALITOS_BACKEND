@@ -615,3 +615,4 @@ C:\Users\samar\source\repos\ANIMALITOS_BACKEND\obj\Debug\net8.0\ANIMALITOS_PHARM
 C:\Users\samar\source\repos\ANIMALITOS_BACKEND\obj\Debug\net8.0\ref\ANIMALITOS_PHARMA_API.dll
 C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\bin\Debug\net8.0\CsvHelper.dll
 C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

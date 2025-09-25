@@ -8,6 +8,8 @@ public class NotificationsUser
 
     public int? UserId { get; set; } = 0;
 
+    public DateTime ReadDate { get; set; } = DateTime.Now;
+
     public int? StatusId { get; set; } = 0;
 }
 
@@ -18,6 +20,8 @@ public class NotificationsUserFilter
     public bool? IsRead { get; set; } = false;
 
     public int? UserId { get; set; } = 0;
+
+    public DateTime ReadDate { get; set; } = DateTime.Now;
 
     public int? StatusId { get; set; } = 0;
 

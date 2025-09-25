@@ -57,6 +57,7 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                         {
                             Id = nu.Id,
                             NotificationId = nu.NotificationId,
+                            CreatedDate = nu.Notification.CreatedDate,
                             Title = nu.Notification.Title ?? string.Empty,
                             Message = nu.Notification.Message ?? string.Empty,
                             IsRead = nu.IsRead ?? false,
