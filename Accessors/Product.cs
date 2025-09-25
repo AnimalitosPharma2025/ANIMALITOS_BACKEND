@@ -1,4 +1,9 @@
+using CsvHelper.Configuration;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Elfie.Serialization;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
+using CsvHelper;
 
 namespace ANIMALITOS_PHARMA_API.Accessors
 {
@@ -56,6 +61,39 @@ namespace ANIMALITOS_PHARMA_API.Accessors
             return ConvertProduct_ToAccessorContract(objTemp);
         }
 
+        //public Task<IActionResult> ImportCSVProduct(IFormFile fileProduct)
+        //{
+        //    if (fileProduct == null || fileProduct.Length == 0)
+        //        throw new Exception("Archivo no válido");
+
+        //    using var stream = fileProduct.OpenReadStream();
+        //    using var reader = new StreamReader(stream);
+        //    var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+        //    {
+        //        Delimiter = ",",
+        //        HasHeaderRecord = true
+        //    };
+
+        //    using var csv = new CsvHelper.CsvReader(reader, config);
+        //    var records = csv.GetRecords<ProductoCsv>().ToList();
+
+        //    // Aquí guardas en tu base de datos
+        //    foreach (var record in records)
+        //    {
+        //        // ejemplo -> guardar en entidad
+        //        var entity = new Producto
+        //        {
+        //            Nombre = record.Nombre,
+        //            Precio = record.Precio,
+        //            Stock = record.Stock
+        //        };
+
+        //        // TODO: guardar en BD con EF Core
+        //    }
+
+        //    return Ok(new { count = records.Count, message = "Importación exitosa" });
+        //}
+
         public Product CreateProduct(Product obj)
         {
             var newObj = ConvertProduct_ToAccessorModel(obj);
@@ -69,7 +107,7 @@ namespace ANIMALITOS_PHARMA_API.Accessors
         public IEnumerable<dynamic> LoadProductTable()
         {
             var productsWithStock = (from product in _EntityContext.Products
-                                     let stock = _EntityContext.InventoryItems.Count(i => i.ProductId == product.Id)
+                                     let stock = _EntityContext.InventoryItems.Count(i => i.ProductId == product.Id && i.StatusId == 1)
                                      select new
                                      {
                                          product.Id,

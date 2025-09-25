@@ -73,6 +73,22 @@ namespace ANIMALITOS_PHARMA_API.Controllers
             }
         }
 
+        //[HttpPost]
+        //[Route("/Product/ImportCSVProduct")]
+        //public IActionResult ImportCSVProduct(IFormFile fileProduct)
+        //{
+        //    try
+        //    {
+        //        accessor.Login((string)ApiHelpers.AuthorizationUser(Request));
+        //        var obj = accessor.ImportCSVProduct(fileProduct);
+        //        return ApiHelpers.CreateSuccessResult(obj, nameof(ImportCSVProduct));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return ApiHelpers.CreateBadResult(ex);
+        //    }
+        //}
+
         [HttpPut]
         [Route("/Product/UpdateProduct")]
         public IActionResult UpdateProduct(Product product)
