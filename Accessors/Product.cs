@@ -1,10 +1,11 @@
+using ANIMALITOS_PHARMA_API.Accessors.Util.StatusEnumerable;
+using ANIMALITOS_PHARMA_API.Models;
+using CsvHelper;
 using CsvHelper.Configuration;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Elfie.Serialization;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
-using CsvHelper;
-using ANIMALITOS_PHARMA_API.Accessors.Util.StatusEnumerable;
 
 namespace ANIMALITOS_PHARMA_API.Accessors
 {

@@ -1,4 +1,4 @@
-using ANIMALITOS_PHARMA_API.Accessors.Util.StatusEnumerable;
+﻿using ANIMALITOS_PHARMA_API.Accessors.Util.StatusEnumerable;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using XAct;
@@ -127,9 +127,10 @@ namespace ANIMALITOS_PHARMA_API.Accessors
         {
             var newProductLot = _EntityContext.ProductLots.Add(ConvertProductLot_ToAccessorModel(productLot));
             _EntityContext.SaveChanges();
-            var inventoryItemsCreatedList = new List<InventoryItem>();
 
+            var inventoryItemsCreatedList = new List<InventoryItem>();
             inventoryItem.ProductLotId = newProductLot.Entity.Id;
+
             for (int item = 0; item < quantityItems; item++)
             {
                 var itemCreated = ConvertInventoryItem_ToAccessorModel(inventoryItem);
@@ -138,9 +139,11 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 inventoryItemsCreatedList.Add(ConvertInventoryItem_ToAccessorContract(itemCreated));
             }
 
+            UpdateProductStatus(inventoryItem.ProductId);
+
             dynamic result = new
             {
-                productLotId = productLot.Id,
+                productLotId = newProductLot.Entity.Id,
                 inventoryItemsCreatedList,
             };
             return result;
@@ -148,34 +151,33 @@ namespace ANIMALITOS_PHARMA_API.Accessors
 
         public dynamic UpdateProductLotWithInventoryItems(ProductLot productLot, InventoryItem inventoryItem, int quantityItemsUpdated)
         {
-            var lotsWithInventorys =
-                from item in _EntityContext.InventoryItems.AsNoTracking() where item.ProductLotId == productLot.Id select item;
+            var lotsWithInventorys = _EntityContext.InventoryItems.AsNoTracking()
+                                        .Where(item => item.ProductLotId == productLot.Id);
 
+            int currentCount = lotsWithInventorys.Count();
             int quantityLoops = 0;
-            var listInventorys = lotsWithInventorys.Map(o =>
+
+            var listInventorys = lotsWithInventorys.Select(o => new InventoryItem
             {
-                return new InventoryItem
-                {
-                    Id = o.Id,
-                    ProductId = o.ProductId,
-                    ProductLotId = o.ProductLotId,
-                    EmployeeId = o.EmployeeId,
-                    StatusId = o.StatusId
-                };
+                Id = o.Id,
+                ProductId = o.ProductId,
+                ProductLotId = o.ProductLotId,
+                EmployeeId = o.EmployeeId,
+                StatusId = o.StatusId
             }).ToList();
 
-            if (lotsWithInventorys.Count() > quantityItemsUpdated)
+            if (currentCount > quantityItemsUpdated)
             {
-                quantityLoops = lotsWithInventorys.Count() - quantityItemsUpdated;
+                quantityLoops = currentCount - quantityItemsUpdated;
                 for (int i = 0; i < quantityLoops; i++)
                 {
                     _EntityContext.InventoryItems.Remove(ConvertInventoryItem_ToAccessorModel(listInventorys[i]));
                 }
             }
 
-            if (lotsWithInventorys.Count() < quantityItemsUpdated)
+            if (currentCount < quantityItemsUpdated)
             {
-                quantityLoops = quantityItemsUpdated - lotsWithInventorys.Count();
+                quantityLoops = quantityItemsUpdated - currentCount;
                 var lastInventory = listInventorys.Last();
 
                 for (int i = 0; i < quantityLoops; i++)
@@ -193,13 +195,31 @@ namespace ANIMALITOS_PHARMA_API.Accessors
             _EntityContext.ProductLots.Update(ConvertProductLot_ToAccessorModel(productLot));
             _EntityContext.SaveChanges();
 
-            dynamic oli = new
+            UpdateProductStatus(inventoryItem.ProductId);
+
+            dynamic result = new
             {
                 listInventorys
             };
-
-            return oli;
+            return result;
         }
+
+        private void UpdateProductStatus(int productId)
+        {
+            var stock = _EntityContext.InventoryItems
+                .Count(i => i.ProductId == productId && i.StatusId == (int)ObjectStatus.INVENTORY_ITEM_STORE_AVAILABLE);
+
+            var product = _EntityContext.Products.FirstOrDefault(p => p.Id == productId);
+            if (product != null)
+            {
+                product.StatusId = stock > 0
+                    ? (int)ObjectStatus.PRODUCT_AVAILABLE
+                    : (int)ObjectStatus.PRODUCT_SOLD_OUT;
+
+                _EntityContext.SaveChanges();
+            }
+        }
+
 
         public ProductLot DeleteProductLotAndInventoryItems(ProductLot productLot)
         {
