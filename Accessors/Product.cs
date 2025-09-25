@@ -4,6 +4,7 @@ using Microsoft.CodeAnalysis.Elfie.Serialization;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using CsvHelper;
+using ANIMALITOS_PHARMA_API.Accessors.Util.StatusEnumerable;
 
 namespace ANIMALITOS_PHARMA_API.Accessors
 {
@@ -107,7 +108,7 @@ namespace ANIMALITOS_PHARMA_API.Accessors
         public IEnumerable<dynamic> LoadProductTable()
         {
             var productsWithStock = (from product in _EntityContext.Products
-                                     let stock = _EntityContext.InventoryItems.Count(i => i.ProductId == product.Id && i.StatusId == 1)
+                                     let stock = _EntityContext.InventoryItems.Count(i => i.ProductId == product.Id && i.StatusId == (int)ObjectStatus.INVENTORY_ITEM_STORE_AVAILABLE)
                                      select new
                                      {
                                          product.Id,
