@@ -4,15 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ANIMALITOS_PHARMA_API.Models;
 
-public partial class AnimalitosPharmaContext : DbContext
+public partial class MiDbContext : DbContext
 {
-    private readonly bool _useRetryLogic;
-    public AnimalitosPharmaContext(bool useRetryLogic)
+    public MiDbContext()
     {
-        _useRetryLogic = useRetryLogic;
     }
 
-    public AnimalitosPharmaContext(DbContextOptions<AnimalitosPharmaContext> options)
+    public MiDbContext(DbContextOptions<MiDbContext> options)
         : base(options)
     {
     }
