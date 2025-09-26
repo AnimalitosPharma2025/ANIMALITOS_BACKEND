@@ -140,8 +140,8 @@ namespace ANIMALITOS_PHARMA_API.Accessors
             objTemp.PurchasePrice = obj.PurchasePrice;
             objTemp.UnitPrice = obj.UnitPrice;
             objTemp.Code = obj.Code;
+            objTemp.Discount = obj.Discount;
             objTemp.VendorId = obj.VendorId;
-            objTemp.StatusId = obj.StatusId;
 
             _EntityContext.Products.Update(objTemp);
             _EntityContext.SaveChanges();
