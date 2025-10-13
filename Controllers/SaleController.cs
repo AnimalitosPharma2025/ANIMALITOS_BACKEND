@@ -1,4 +1,5 @@
 using ANIMALITOS_PHARMA_API.Accessors;
+using ANIMALITOS_PHARMA_API.Contract.DTO;
 using ANIMALITOS_PHARMA_API.Controllers.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
@@ -66,6 +67,22 @@ namespace ANIMALITOS_PHARMA_API.Controllers
             {
                 accessor.Login((string)ApiHelpers.AuthorizationUser(Request));
                 var obj = accessor.CreateSale(sale);
+                return ApiHelpers.CreateSuccessResult(obj, nameof(CreateSale));
+            }
+            catch (Exception ex)
+            {
+                return ApiHelpers.CreateBadResult(ex);
+            }
+        }
+
+        [HttpPost]
+        [Route("/Sale/ConfirmSale")]
+        public IActionResult ConfirmSale(ConfirmSaleDto saleData)
+        {
+            try
+            {
+                accessor.Login((string)ApiHelpers.AuthorizationUser(Request));
+                var obj = accessor.ConfirmSale(saleData);
                 return ApiHelpers.CreateSuccessResult(obj, nameof(CreateSale));
             }
             catch (Exception ex)

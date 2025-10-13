@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ANIMALITOS_PHARMA_API.Contract.DTO;
+using Microsoft.EntityFrameworkCore;
 
 namespace ANIMALITOS_PHARMA_API.Accessors
 {
@@ -83,6 +84,13 @@ namespace ANIMALITOS_PHARMA_API.Accessors
             return sales;
         }
 
+        public dynamic ConfirmSale(ConfirmSaleDto confirmSale)
+        {
+            return new
+            {
+
+            };
+        }
 
         public Sale CreateSale(Sale obj)
         {

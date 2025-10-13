@@ -72,4 +72,10 @@
         public bool IsRead { get; set; }
         public int? StatusId { get; set; }
     }
+
+    public class ConfirmSaleDto
+    {
+        public int ClientId { get; set; }
+        public List<dynamic>? items { get; set; }
+    }
 }
