@@ -1,4 +1,5 @@
-﻿using ANIMALITOS_PHARMA_API.Contract.DTO;
+﻿using ANIMALITOS_PHARMA_API.Accessors.Util.StatusEnumerable;
+using ANIMALITOS_PHARMA_API.Contract.DTO;
 using Microsoft.EntityFrameworkCore;
 
 namespace ANIMALITOS_PHARMA_API.Accessors
@@ -86,6 +87,30 @@ namespace ANIMALITOS_PHARMA_API.Accessors
 
         public dynamic ConfirmSale(ConfirmSaleDto confirmSale)
         {
+            try
+            {
+                var saleObject = new Sale
+                {
+                    PurchaseDate = confirmSale.SaleDate,
+                    ClientId = confirmSale.ClientId,
+                    EmployeeId = confirmSale.EmployeeId,
+                    StatusId = (int)ObjectStatus.INACTIVE,
+                    Total = confirmSale.TotalAmount
+                };
+
+                var createdSale = _EntityContext.Sales.Add(ConvertSale_ToAccessorModel(saleObject));
+                //foreach (var item in confirmSale.items!)
+                //{
+
+                //}
+                _EntityContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
             return new
             {
 
@@ -159,6 +184,7 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 PurchaseDate = tempItem.PurchaseDate,
                 ClientId = (int)tempItem.ClientId,
                 EmployeeId = tempItem.EmployeeId,
+                Total = tempItem.Total,
                 StatusId = tempItem.StatusId
             };
 

@@ -8,7 +8,7 @@ public class Sale
 
     public int EmployeeId { get; set; } = 0;
 
-    public int InventoryId { get; set; } = 0;
+    public decimal Total { get; set; }
 
     public int StatusId { get; set; } = 0;
 }
@@ -23,7 +23,7 @@ public class SaleFilter
 
     public int EmployeeId { get; set; } = 0;
 
-    public int InventoryId { get; set; } = 0;
+    public decimal Total { get; set; }
 
     public int StatusId { get; set; } = 0;
 

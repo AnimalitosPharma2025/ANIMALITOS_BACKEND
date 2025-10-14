@@ -75,7 +75,19 @@
 
     public class ConfirmSaleDto
     {
+        public int EmployeeId { get; set; }
         public int ClientId { get; set; }
-        public List<dynamic>? items { get; set; }
+        public List<ItemsConfirmSaleDto>? items { get; set; }
+        public DateTime SaleDate { get; set; }
+        public decimal TotalAmount { get; set; }
+    }
+
+    public class ItemsConfirmSaleDto
+    {
+        public String? ProductName { get; set; }
+        public int LotNumber { get; set; }
+        public double unitPrice { get; set; }
+        public int Quantity { get; set; }
+        public double Discount { get; set; }
     }
 }
