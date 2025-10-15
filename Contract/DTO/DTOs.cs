@@ -77,6 +77,7 @@
     {
         public int EmployeeId { get; set; }
         public int ClientId { get; set; }
+        public int LoadId { get; set; }
         public List<ItemsConfirmSaleDto>? items { get; set; }
         public DateTime SaleDate { get; set; }
         public decimal TotalAmount { get; set; }

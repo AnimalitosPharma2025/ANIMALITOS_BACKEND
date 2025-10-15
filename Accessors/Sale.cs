@@ -99,11 +99,12 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 };
 
                 var createdSale = _EntityContext.Sales.Add(ConvertSale_ToAccessorModel(saleObject));
-                foreach (var item in confirmSale.items!)
+                var itemsOnLoad = _EntityContext.LoadsContents.Where(i => i.LoadId == confirmSale.LoadId).ToList();
+
+                foreach (var item in itemsOnLoad)
                 {
-                    Console.WriteLine(item);
+                    
                 }
-                _EntityContext.SaveChanges();
             }
             catch (Exception ex)
             {

@@ -99,6 +99,7 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                     StatusId = l.Status != null ? l.Status.Id : 0,
                     Contents = l.LoadsContents.Select(lc => new
                     {
+                        ProductId = lc.Inventory!.Product.Id,
                         ProductName = lc.Inventory!.Product.Name,
                         LotNumber = lc.Inventory.ProductLot.Id,
                         ExpirationDate = lc.Inventory.ProductLot.Expiration,
