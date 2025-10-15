@@ -190,6 +190,15 @@ namespace ANIMALITOS_PHARMA_API.Accessors
 
                     foreach (var item in availableItems)
                     {
+                        var updateInventoryItem = new InventoryItem
+                        {
+                            ProductId = item.ProductId,
+                            ProductLotId = item.ProductLotId,
+                            EmployeeId = item.EmployeeId,
+                            StatusId = (int)ObjectStatus.INVENTORY_ITEM_ON_ROUTE
+                        };
+
+                        _EntityContext.InventoryItems.Update(ConvertInventoryItem_ToAccessorModel(updateInventoryItem));
                         var loadContent = new LoadsContent
                         {
                             LoadId = newLoadObject.Id,
