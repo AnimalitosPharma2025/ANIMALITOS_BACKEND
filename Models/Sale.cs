@@ -23,7 +23,7 @@ public partial class Sale
 
     public virtual Employee Employee { get; set; } = null!;
 
-    public virtual InventoryItem Inventory { get; set; } = null!;
+    //public virtual InventoryItem? Inventory { get; set; }
 
     public virtual Status Status { get; set; } = null!;
 }
