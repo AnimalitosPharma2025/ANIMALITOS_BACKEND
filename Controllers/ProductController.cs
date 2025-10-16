@@ -48,7 +48,7 @@ namespace ANIMALITOS_PHARMA_API.Controllers
             try
             {
                 accessor.Login((string)ApiHelpers.AuthorizationUser(Request));
-                var obj = accessor.GetListProduct(filter);
+                var obj = accessor.UploadProductImage(filter);
                 return ApiHelpers.CreateSuccessResult(obj, nameof(GetListProduct));
             }
             catch (Exception ex)
@@ -75,12 +75,14 @@ namespace ANIMALITOS_PHARMA_API.Controllers
 
         [HttpPost]
         [Route("/Product/CreateProduct")]
-        public IActionResult CreateProduct(Product product)
+        public async Task<IActionResult> CreateProduct([FromForm] string productJson, IFormFile? imageFile)
         {
             try
             {
                 accessor.Login((string)ApiHelpers.AuthorizationUser(Request));
-                var obj = accessor.CreateProduct(product);
+                var product = System.Text.Json.JsonSerializer.Deserialize<Product>(productJson);
+                var obj = await accessor.CreateProduct(product!, imageFile);
+
                 return ApiHelpers.CreateSuccessResult(obj, nameof(CreateProduct));
             }
             catch (Exception ex)

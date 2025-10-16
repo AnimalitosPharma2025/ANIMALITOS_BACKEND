@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Elfie.Serialization;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
+using System.Threading.Tasks;
 
 namespace ANIMALITOS_PHARMA_API.Accessors
 {
@@ -96,14 +97,51 @@ namespace ANIMALITOS_PHARMA_API.Accessors
         //    return Ok(new { count = records.Count, message = "Importación exitosa" });
         //}
 
-        public Product CreateProduct(Product obj)
+        public async Task<Product> CreateProduct(Product obj, IFormFile? imageFile)
         {
             var newObj = ConvertProduct_ToAccessorModel(obj);
 
+            if (imageFile != null)
+            {
+                string imageUrl = await UploadProductImage(imageFile);
+                newObj.ImageUrl = imageUrl;
+            }
+
             _EntityContext.Products.Add(newObj);
-            _EntityContext.SaveChanges();
+            await _EntityContext.SaveChangesAsync();
 
             return ConvertProduct_ToAccessorContract(newObj);
+        }
+
+        public async Task<string> UploadProductImage(IFormFile image)
+        {
+            const string imgbbKey = "abce5299756133d206d14af2682f4b93";
+
+            using var httpClient = new HttpClient();
+            using var ms = new MemoryStream();
+
+            await image.CopyToAsync(ms);
+            var base64 = Convert.ToBase64String(ms.ToArray());
+
+            var form = new MultipartFormDataContent
+            {
+                { new StringContent(imgbbKey), "key" },
+                { new StringContent(base64), "image" }
+            };
+
+            var response = await httpClient.PostAsync("https://api.imgbb.com/1/upload", form);
+            var json = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception($"Error al subir imagen: {response.StatusCode} - {json}");
+
+            using var doc = System.Text.Json.JsonDocument.Parse(json);
+            string? imageUrl = doc.RootElement
+                .GetProperty("data")
+                .GetProperty("url")
+                .GetString();
+
+            return imageUrl ?? string.Empty;
         }
 
         public IEnumerable<dynamic> LoadProductTable()

@@ -1079,9 +1079,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "product",
-        "Type": "Product",
-        "IsRequired": true
+        "Name": "productJson",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "imageFile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -1161,6 +1166,22 @@
         "Name": "product",
         "Type": "Product",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.ProductController",
+    "Method": "UploadProductImage",
+    "RelativePath": "Product/UploadProductImage",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "filter",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
