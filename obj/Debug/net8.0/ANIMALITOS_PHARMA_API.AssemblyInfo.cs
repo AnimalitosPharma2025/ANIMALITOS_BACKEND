@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ANIMALITOS_PHARMA_API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+211b20be28c34fdb5e5d94716114c326df697ae0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+faaf352187ffe4738bf173f19935681f94836e89")]
 [assembly: System.Reflection.AssemblyProductAttribute("ANIMALITOS_PHARMA_API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ANIMALITOS_PHARMA_API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

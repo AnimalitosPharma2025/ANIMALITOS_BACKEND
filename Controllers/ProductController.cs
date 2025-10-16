@@ -41,6 +41,22 @@ namespace ANIMALITOS_PHARMA_API.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("/Product/UploadProductImage")]
+        public IActionResult UploadProductImage(IFormFile filter)
+        {
+            try
+            {
+                accessor.Login((string)ApiHelpers.AuthorizationUser(Request));
+                var obj = accessor.GetListProduct(filter);
+                return ApiHelpers.CreateSuccessResult(obj, nameof(GetListProduct));
+            }
+            catch (Exception ex)
+            {
+                return ApiHelpers.CreateBadResult(ex);
+            }
+        }
+
         [HttpGet]
         [Route("/Product/GetAllProducts")]
         public IActionResult LoadProductTable()
