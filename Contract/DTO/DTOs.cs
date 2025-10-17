@@ -85,6 +85,7 @@
 
     public class ItemsConfirmSaleDto
     {
+        public int ProductId { get; set; }
         public String? ProductName { get; set; }
         public int LotNumber { get; set; }
         public double unitPrice { get; set; }

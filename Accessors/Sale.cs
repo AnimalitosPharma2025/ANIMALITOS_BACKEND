@@ -1,6 +1,8 @@
 ﻿using ANIMALITOS_PHARMA_API.Accessors.Util.StatusEnumerable;
 using ANIMALITOS_PHARMA_API.Contract.DTO;
+using ANIMALITOS_PHARMA_API.Contracts;
 using Microsoft.EntityFrameworkCore;
+using XAct;
 
 namespace ANIMALITOS_PHARMA_API.Accessors
 {
@@ -87,35 +89,45 @@ namespace ANIMALITOS_PHARMA_API.Accessors
 
         public dynamic ConfirmSale(ConfirmSaleDto confirmSale)
         {
-            try
+            var saleObject = new Sale
             {
-                var saleObject = new Sale
-                {
-                    PurchaseDate = confirmSale.SaleDate,
-                    ClientId = confirmSale.ClientId,
-                    EmployeeId = confirmSale.EmployeeId,
-                    StatusId = (int)ObjectStatus.INACTIVE,
-                    Total = confirmSale.TotalAmount
-                };
+                PurchaseDate = confirmSale.SaleDate,
+                ClientId = confirmSale.ClientId,
+                EmployeeId = confirmSale.EmployeeId,
+                StatusId = (int)ObjectStatus.INACTIVE,
+                Total = confirmSale.TotalAmount
+            };
 
-                var createdSale = _EntityContext.Sales.Add(ConvertSale_ToAccessorModel(saleObject));
-                var itemsOnLoad = _EntityContext.LoadsContents.Where(i => i.LoadId == confirmSale.LoadId).ToList();
+            var createdSale = _EntityContext.Sales.Add(ConvertSale_ToAccessorModel(saleObject));
+            var itemsOnLoad = _EntityContext.LoadsContents.Where(i => i.LoadId == confirmSale.LoadId).ToList();
+            var itemsForSale = new List<InventoryItem>();
 
-                foreach (var item in itemsOnLoad)
+            foreach (var itemForSale in confirmSale.items!)
+            {
+                itemsForSale.Add(FindInventoryItemForSale(itemForSale, itemsOnLoad, itemForSale.Quantity));
+            }
+
+            Console.WriteLine(itemsForSale);
+        }
+
+        public List<InventoryItem> FindInventoryItemForSale(ItemsConfirmSaleDto itemForSale, List<Models.LoadsContent> loadContent, int quantityOfProducts)
+        {
+            int countQuantity = 0;
+            var itemsForSale = new List<InventoryItem>();
+
+            foreach (var itemOnContent in loadContent)
+            {
+                if (countQuantity == quantityOfProducts) break;
+
+                var inventoryItem = _EntityContext.InventoryItems.FirstOrDefault(i => i.Id == itemOnContent.InventoryId && i.ProductId == itemForSale.ProductId);
+                if (inventoryItem?.StatusId == (int)ObjectStatus.INVENTORY_ITEM_ON_ROUTE)
                 {
-                    
+                    itemsForSale.Add(ConvertInventoryItem_ToAccessorContract(inventoryItem));
+                    countQuantity++;
                 }
             }
-            catch (Exception ex)
-            {
 
-            }
-
-
-            return new
-            {
-
-            };
+            return itemsForSale;
         }
 
         public Sale CreateSale(Sale obj)

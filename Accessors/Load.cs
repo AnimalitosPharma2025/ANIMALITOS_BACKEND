@@ -180,13 +180,15 @@ namespace ANIMALITOS_PHARMA_API.Accessors
                 {
                     int requiredQty = formData.GetProperty("contents")[indexProductLot].GetProperty("quantity").GetInt32();
 
-                    var availableItems = _EntityContext.InventoryItems
-                        .Where(m => m.ProductLotId == lot.Id && !_EntityContext.LoadsContents.Any(lc => lc.InventoryId == m.Id))
-                        .OrderBy(m => m.Id)
-                        .Take(requiredQty)
-                        .ToList();
+                var availableItems = _EntityContext.InventoryItems.Where(m =>
+                        m.ProductLotId == lot.Id &&
+                        m.StatusId == (int)ObjectStatus.INVENTORY_ITEM_STORE_AVAILABLE &&
+                        !_EntityContext.LoadsContents.Any(lc => lc.InventoryId == m.Id))
+                            .OrderBy(m => m.Id)
+                            .Take(requiredQty)
+                            .ToList();
 
-                    if (availableItems.Count < requiredQty)
+                if (availableItems.Count < requiredQty)
                         throw new Exception($"Not enough free items in lot {lot.Id}. Needed {requiredQty}, found {availableItems.Count}");
 
                     foreach (var item in availableItems)
