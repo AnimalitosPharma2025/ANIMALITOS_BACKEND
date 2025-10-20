@@ -6,6 +6,8 @@
 
     public string? Message { get; set; } = "";
 
+    public DateTime CreatedDate { get; set; }
+
     public int? StatusId { get; set; } = 0;
 }
 

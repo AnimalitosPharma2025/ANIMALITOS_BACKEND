@@ -87,28 +87,28 @@ namespace ANIMALITOS_PHARMA_API.Accessors
             return sales;
         }
 
-        public dynamic ConfirmSale(ConfirmSaleDto confirmSale)
-        {
-            var saleObject = new Sale
-            {
-                PurchaseDate = confirmSale.SaleDate,
-                ClientId = confirmSale.ClientId,
-                EmployeeId = confirmSale.EmployeeId,
-                StatusId = (int)ObjectStatus.INACTIVE,
-                Total = confirmSale.TotalAmount
-            };
+        //public dynamic ConfirmSale(ConfirmSaleDto confirmSale)
+        //{
+        //    var saleObject = new Sale
+        //    {
+        //        PurchaseDate = confirmSale.SaleDate,
+        //        ClientId = confirmSale.ClientId,
+        //        EmployeeId = confirmSale.EmployeeId,
+        //        StatusId = (int)ObjectStatus.INACTIVE,
+        //        Total = confirmSale.TotalAmount
+        //    };
 
-            var createdSale = _EntityContext.Sales.Add(ConvertSale_ToAccessorModel(saleObject));
-            var itemsOnLoad = _EntityContext.LoadsContents.Where(i => i.LoadId == confirmSale.LoadId).ToList();
-            var itemsForSale = new List<InventoryItem>();
+        //    var createdSale = _EntityContext.Sales.Add(ConvertSale_ToAccessorModel(saleObject));
+        //    var itemsOnLoad = _EntityContext.LoadsContents.Where(i => i.LoadId == confirmSale.LoadId).ToList();
+        //    var itemsForSale = new List<InventoryItem>();
 
-            foreach (var itemForSale in confirmSale.items!)
-            {
-                itemsForSale.Add(FindInventoryItemForSale(itemForSale, itemsOnLoad, itemForSale.Quantity));
-            }
+        //    foreach (var itemForSale in confirmSale.items!)
+        //    {
+        //        itemsForSale.Add(FindInventoryItemForSale(itemForSale, itemsOnLoad, itemForSale.Quantity));
+        //    }
 
-            Console.WriteLine(itemsForSale);
-        }
+        //    Console.WriteLine(itemsForSale);
+        //}
 
         public List<InventoryItem> FindInventoryItemForSale(ItemsConfirmSaleDto itemForSale, List<Models.LoadsContent> loadContent, int quantityOfProducts)
         {

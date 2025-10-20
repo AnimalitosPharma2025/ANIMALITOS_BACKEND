@@ -85,6 +85,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.AdminController",
+    "Method": "GetAddressBook",
+    "RelativePath": "Administrator/GetUser",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.Authorization.AuthorizationController",
     "Method": "SignIn",
     "RelativePath": "Authorization/SignIn",
@@ -1494,22 +1510,6 @@
       {
         "Name": "rolPermission",
         "Type": "RolPermission",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.SaleController",
-    "Method": "ConfirmSale",
-    "RelativePath": "Sale/ConfirmSale",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "saleData",
-        "Type": "ANIMALITOS_PHARMA_API.Contract.DTO.ConfirmSaleDto",
         "IsRequired": true
       }
     ],

@@ -54,6 +54,18 @@
               "target": "Package",
               "version": "[33.1.0, )"
             },
+            "Hangfire": {
+              "target": "Package",
+              "version": "[1.8.21, )"
+            },
+            "Hangfire.AspNetCore": {
+              "target": "Package",
+              "version": "[1.8.21, )"
+            },
+            "Hangfire.SqlServer": {
+              "target": "Package",
+              "version": "[1.8.21, )"
+            },
             "MSTest.TestFramework": {
               "target": "Package",
               "version": "[3.8.3, )"

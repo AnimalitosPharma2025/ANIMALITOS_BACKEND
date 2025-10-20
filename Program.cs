@@ -1,5 +1,9 @@
-using ANIMALITOS_PHARMA_API.Custom;
+﻿using ANIMALITOS_PHARMA_API.Custom;
 using ANIMALITOS_PHARMA_API.Models;
+using ANIMALITOS_PHARMA_API.Services;
+using Hangfire;
+using Hangfire.Dashboard;
+using Hangfire.SqlServer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -7,6 +11,14 @@ using System.Text;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = "Server=SQL1004.site4now.net;Database=db_abac9a_animalitospharma;User Id=db_abac9a_animalitospharma_admin;Password=QEdTsFa2TE92y8zc;TrustServerCertificate=True;MultipleActiveResultSets=true;";
+
+builder.Services.AddHangfire(config =>
+    config.UseSqlServerStorage(connectionString)
+);
+builder.Services.AddHangfireServer();
+builder.Services.AddScoped<ProductLotChecker>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -58,6 +70,19 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseHangfireDashboard("/hangfire", new Hangfire.DashboardOptions
+{
+    Authorization = new IDashboardAuthorizationFilter[]
+    {
+        new HangfireAuthorizationFilter()
+    }
+});
+
+RecurringJob.AddOrUpdate<ProductLotChecker>(
+    job => job.ExecuteAsync(),
+    "0 6 * * *" // todos los días a las 6 AM
+);
 
 app.UseCors(MyAllowSpecificOrigins);
 

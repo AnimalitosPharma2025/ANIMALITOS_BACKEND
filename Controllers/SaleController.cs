@@ -75,21 +75,21 @@ namespace ANIMALITOS_PHARMA_API.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("/Sale/ConfirmSale")]
-        public IActionResult ConfirmSale(ConfirmSaleDto saleData)
-        {
-            try
-            {
-                accessor.Login((string)ApiHelpers.AuthorizationUser(Request));
-                var obj = accessor.ConfirmSale(saleData);
-                return ApiHelpers.CreateSuccessResult(obj, nameof(CreateSale));
-            }
-            catch (Exception ex)
-            {
-                return ApiHelpers.CreateBadResult(ex);
-            }
-        }
+        //[HttpPost]
+        //[Route("/Sale/ConfirmSale")]
+        //public IActionResult ConfirmSale(ConfirmSaleDto saleData)
+        //{
+        //    try
+        //    {
+        //        accessor.Login((string)ApiHelpers.AuthorizationUser(Request));
+        //        var obj = accessor.ConfirmSale(saleData);
+        //        return ApiHelpers.CreateSuccessResult(obj, nameof(CreateSale));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return ApiHelpers.CreateBadResult(ex);
+        //    }
+        //}
 
         [HttpPut]
         [Route("/Sale/UpdateSale")]
