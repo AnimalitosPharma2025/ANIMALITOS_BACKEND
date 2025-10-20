@@ -81,7 +81,8 @@ app.UseHangfireDashboard("/hangfire", new Hangfire.DashboardOptions
 
 RecurringJob.AddOrUpdate<ProductLotChecker>(
     job => job.ExecuteAsync(),
-    "0 6 * * *" // todos los días a las 6 AM
+    "0 6 * * *", // 6:00 AM
+    TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time") // México
 );
 
 app.UseCors(MyAllowSpecificOrigins);
