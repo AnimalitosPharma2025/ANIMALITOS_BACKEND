@@ -23,7 +23,6 @@ namespace ANIMALITOS_PHARMA_API.Services
             using var scope = _serviceProvider.CreateScope();
             var context = scope.ServiceProvider.GetRequiredService<AnimalitosPharmaContext>();
 
-            // 🔹 Crear la notificación
             var notification = new Models.Notification
             {
                 Title = "Este mensaje debe estar el dia 21 de Octubre",
@@ -35,6 +34,16 @@ namespace ANIMALITOS_PHARMA_API.Services
             context.Notifications.Add(notification);
             await context.SaveChangesAsync();
 
+            var notificationUser = new Models.NotificationsUser
+            {
+                IsRead = false,
+                UserId = 8,
+                NotificationId = notification.Id,
+                StatusId = (int)ObjectStatus.UNIT_TEST_CREATE,
+            };
+
+            context.NotificationsUsers.Add(notificationUser);
+            await context.SaveChangesAsync();
             //// 🔹 Asignar a usuarios con roles específicos
             //var targetUsers = await context.Users
             //    .Where(u => new[] { (int)Roles.Admin, (int)Roles.Pharmacist }.Contains(u.RoleId))
