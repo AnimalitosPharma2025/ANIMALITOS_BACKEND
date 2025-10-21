@@ -634,3 +634,11 @@ C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\obj\Debug\net8.0\refint\ANIMALITO
 C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\obj\Debug\net8.0\ANIMALITOS_PHARMA_API.pdb
 C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\obj\Debug\net8.0\ANIMALITOS_PHARMA_API.genruntimeconfig.cache
 C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\obj\Debug\net8.0\ref\ANIMALITOS_PHARMA_API.dll
+C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\bin\Debug\net8.0\ClosedXML.dll
+C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\bin\Debug\net8.0\ClosedXML.Parser.dll
+C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\bin\Debug\net8.0\DocumentFormat.OpenXml.dll
+C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\bin\Debug\net8.0\DocumentFormat.OpenXml.Framework.dll
+C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\bin\Debug\net8.0\ExcelNumberFormat.dll
+C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\bin\Debug\net8.0\RBush.dll
+C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\bin\Debug\net8.0\SixLabors.Fonts.dll
+C:\Users\Aloga\source\repos\ANIMALITOS_BACKEND\bin\Debug\net8.0\System.IO.Packaging.dll

@@ -1,5 +1,6 @@
 using ANIMALITOS_PHARMA_API.Accessors;
 using ANIMALITOS_PHARMA_API.Controllers.Helpers;
+using ANIMALITOS_PHARMA_API.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ANIMALITOS_PHARMA_API.Controllers
@@ -9,6 +10,13 @@ namespace ANIMALITOS_PHARMA_API.Controllers
     public class ProductController : ControllerBase
     {
         private readonly AnimalitosClient accessor = new();
+        private readonly ProductImportService _importService;
+
+        public ProductController(ProductImportService importService)
+        {
+            _importService = importService;
+        }
+
         [HttpGet]
         [Route("/Product/GetProduct/{id}")]
         public IActionResult GetProduct(int id)
@@ -89,6 +97,20 @@ namespace ANIMALITOS_PHARMA_API.Controllers
             {
                 return ApiHelpers.CreateBadResult(ex);
             }
+        }
+
+        [HttpPost]
+        [Route("/Product/ImportProducts")]
+        public async Task<IActionResult> ImportProducts(IFormFile file)
+        {
+            accessor.Login((string)ApiHelpers.AuthorizationUser(Request));
+            if (file == null || file.Length == 0)
+                return BadRequest("Archivo inválido.");
+
+            using var stream = file.OpenReadStream();
+            await _importService.ImportProductsAsync(stream);
+
+            return Ok(new { message = "Importación completada exitosamente." });
         }
 
         //[HttpPost]

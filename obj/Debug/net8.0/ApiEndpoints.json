@@ -1172,6 +1172,22 @@
   },
   {
     "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.ProductController",
+    "Method": "ImportProducts",
+    "RelativePath": "Product/ImportProducts",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "file",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ANIMALITOS_PHARMA_API.Controllers.ProductController",
     "Method": "UpdateProduct",
     "RelativePath": "Product/UpdateProduct",
     "HttpMethod": "PUT",

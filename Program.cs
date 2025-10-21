@@ -19,6 +19,7 @@ builder.Services.AddHangfire(config =>
 );
 builder.Services.AddHangfireServer();
 builder.Services.AddScoped<ProductLotChecker>();
+builder.Services.AddScoped<ProductImportService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -81,8 +82,8 @@ app.UseHangfireDashboard("/hangfire", new Hangfire.DashboardOptions
 
 RecurringJob.AddOrUpdate<ProductLotChecker>(
     job => job.ExecuteAsync(),
-    "0 6 * * *", // 6:00 AM
-    TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time") // México
+    "0 9 * * *", // 6:00 AM
+    TimeZoneInfo.FindSystemTimeZoneById("America/Mexico_City") // México
 );
 
 app.UseCors(MyAllowSpecificOrigins);
